@@ -20,3 +20,7 @@
 * [Internet Relay Chat: Channel Management](https://datatracker.ietf.org/doc/html/rfc2811)
 * [Internet Relay Chat: Client Protocol](https://datatracker.ietf.org/doc/html/rfc2812)
 * [Internet Relay Chat: Server Protocol](https://datatracker.ietf.org/doc/html/rfc2813)
+
+# Video de un chico haciendo un server irc simple en C++ (ES EN WINDOWS ASI QUE ES DISTINTO PERO ES MUY SIMPLE)
+* https://github.com/SebastianRiquelmeM/Socket-C-Class-Server/tree/master
+* https://www.youtube.com/watch?v=0I56pVOSK0E&feature=youtu.be
