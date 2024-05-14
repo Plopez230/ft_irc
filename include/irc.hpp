@@ -17,6 +17,9 @@
 #include <vector>
 #include <queue>
 #include <poll.h>
+#include <arpa/inet.h>
+
+#define BUFFER_SIZE 10000
 
 #define MODE_I 1
 #define MODE_K 2
@@ -46,6 +49,8 @@ public:
     const std::string get_host() const;
     void set_server(const std::string &server);
     const std::string get_server() const;
+    void set_input_buffer(const std::string &input_buffer);
+    const std::string get_input_buffer() const;
     void set_is_authenticated(bool is_authenticated);
     bool get_is_authenticated() const;
     void set_fd(int fd);
@@ -136,7 +141,8 @@ class SocketManager
 private:
     std::vector<pollfd> pollfds;
     int port;
-    pollfd manager_fd;
+    int manager_fd;
+    sockaddr_in address;
     Server &server;
     SocketManager();
     SocketManager(const SocketManager &s);
@@ -145,8 +151,8 @@ public:
     SocketManager(int port, Server &server);
     ~SocketManager();
     void loop();
-    void new_connection(pollfd pfd, std::vector<pollfd> &to_close);
-    void end_connection(pollfd pfd, std::vector<pollfd> &to_close);
+    void new_connection(pollfd pfd);
+    void end_connection(pollfd pfd);
     void receive_message(pollfd pfd, std::vector<pollfd> &to_close);
     void send_messages(pollfd pfd, std::vector<pollfd> &to_close);
 };
