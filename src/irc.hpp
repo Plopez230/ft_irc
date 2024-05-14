@@ -97,7 +97,7 @@ private:
     Server(const Server &s);
     Server &operator=(const Server &s);
 public:
-    Server(int pass);
+    Server(std::string &pass);
     ~Server();
     const std::string get_server_name() const;
     const std::string get_server_version() const;
