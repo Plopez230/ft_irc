@@ -15,6 +15,7 @@
 
 #include <string>
 #include <vector>
+#include <queue>
 #include <poll.h>
 
 #define MODE_I 1
