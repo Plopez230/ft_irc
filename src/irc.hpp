@@ -47,7 +47,7 @@ public:
     const std::string get_server() const;
     void set_is_authenticated(const bool is_authenticated);
     const bool get_is_authenticated() const;
-    void set_fd(int fd);
+    void set_fd(const int fd);
     const int get_fd() const;
     void enqueue_message(const std::string &message);
     const std::string dequeue_message();
@@ -111,8 +111,8 @@ public:
     void remove_channel(const std::string &topic);
     std::vector<Channel *>::iterator get_channel(const std::string &topic) const;
     const bool is_channel(const std::string &topic) const;
-    std::vector<User *>::iterator get_user_by_fd(int fd) const;
-    void end_user_connection(int fd);
+    std::vector<User *>::iterator get_user_by_fd(const int fd) const;
+    void end_user_connection(const int fd);
     void print_server_status(const std::string &last_message) const;
 };
 
