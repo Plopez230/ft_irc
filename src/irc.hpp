@@ -116,6 +116,7 @@ class Command
 {
 private:
     std::vector<std::string> arguments;
+    std::string message;
     Command();
     Command(const Command &c);
     Command &operator=(const Command &c);
