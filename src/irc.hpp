@@ -131,6 +131,7 @@ class SocketManager
 private:
     std::vector<pollfd> pollfds;
     int port;
+    pollfd manager_fd;
     Server &server;
     SocketManager();
     SocketManager(const SocketManager &s);
@@ -139,10 +140,10 @@ public:
     SocketManager(int port, Server &server);
     ~SocketManager();
     void loop();
-    void new_connection(pollfd pfd);
-    void end_connection(pollfd pfd);
-    void receive_message(pollfd pfd);
-    void send_messages(pollfd pfd);
+    void new_connection(pollfd pfd, std::vector<pollfd> &to_close);
+    void end_connection(pollfd pfd, std::vector<pollfd> &to_close);
+    void receive_message(pollfd pfd, std::vector<pollfd> &to_close);
+    void send_messages(pollfd pfd, std::vector<pollfd> &to_close);
 };
 
 std::vector<User *>::iterator get_user_by_nickname(
