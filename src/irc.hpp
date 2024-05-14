@@ -136,14 +136,14 @@ private:
     SocketManager();
     SocketManager(const SocketManager &s);
     SocketManager &operator=(const SocketManager &s);
-public:
-    SocketManager(int port, Server &server);
-    ~SocketManager();
-    void loop();
     void new_connection(pollfd pfd, std::vector<pollfd> &to_close);
     void end_connection(pollfd pfd, std::vector<pollfd> &to_close);
     void receive_message(pollfd pfd, std::vector<pollfd> &to_close);
     void send_messages(pollfd pfd, std::vector<pollfd> &to_close);
+public:
+    SocketManager(int port, Server &server);
+    ~SocketManager();
+    void loop();
 };
 
 std::vector<User *>::iterator get_user_by_nickname(
