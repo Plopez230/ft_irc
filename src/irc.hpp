@@ -113,7 +113,7 @@ public:
     const bool is_channel(std::string &topic) const;
     std::vector<User *>::iterator get_user_by_fd(int fd) const;
     void end_user_connection(int fd);
-    void print_server_status() const;
+    void print_server_status(std::string &last_message) const;
 };
 
 class Command
