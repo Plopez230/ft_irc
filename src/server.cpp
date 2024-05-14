@@ -15,6 +15,7 @@
 
 Server::Server(const std::string &pass)
 {
+    this->pass = pass;
     this->server_name = "irc.free_shipping.net";
     this->server_version = "v1.0";
     this->socket_manager = NULL;
@@ -22,10 +23,10 @@ Server::Server(const std::string &pass)
 
 Server::~Server()
 {
-    for (std::vector<User *>::const_iterator u = this->registered.begin();
+    for (std::vector<User *>::iterator u = this->registered.begin();
         u != this->registered.end(); u++)
         delete *u;
-    for (std::vector<Channel *>::const_iterator c = this->channels.begin();
+    for (std::vector<Channel *>::iterator c = this->channels.begin();
         c != this->channels.end(); c++)
         delete *c;
 }
@@ -60,7 +61,7 @@ void Server::remove_registered(const std::string &nickname)
 {
     if (this->is_registered(nickname))
     {
-        for (std::vector<Channel *>::const_iterator c = this->channels.begin();
+        for (std::vector<Channel *>::iterator c = this->channels.begin();
             c < this->channels.end(); c++)
         {
             (*c)->remove_invitation(nickname);
@@ -71,13 +72,13 @@ void Server::remove_registered(const std::string &nickname)
     }
 }
 
-std::vector<User *>::const_iterator Server::get_registered(
-    const std::string &nickname) const
+std::vector<User *>::iterator Server::get_registered(
+    const std::string &nickname)
 {
     return get_user_by_nickname(this->registered, nickname);
 }
 
-const bool Server::is_registered(const std::string &nickname) const
+bool Server::is_registered(const std::string &nickname)
 {
     return this->get_registered(nickname) != this->registered.end();
 }
@@ -96,20 +97,20 @@ void Server::remove_channel(const std::string &topic)
     }
 }
 
-std::vector<Channel *>::const_iterator Server::get_channel(
-    const std::string &topic) const
+std::vector<Channel *>::iterator Server::get_channel(
+    const std::string &topic)
 {
     return get_channel_by_topic(this->channels, topic);
 }
 
-const bool Server::is_channel(const std::string &topic) const
+bool Server::is_channel(const std::string &topic)
 {
     return this->get_channel(topic) != this->channels.end();
 }
 
-std::vector<User *>::const_iterator Server::get_user_by_fd(const int fd) const
+std::vector<User *>::iterator Server::get_user_by_fd(int fd)
 {
-    for (std::vector<User *>::const_iterator u = this->registered.begin();
+    for (std::vector<User *>::iterator u = this->registered.begin();
         u != this->registered.end(); u++)
     {
         if ((*u)->get_fd() == fd)
@@ -126,7 +127,7 @@ void Server::print_server_status(const std::string &last_message) const
     std::cout << " Clients connected: " << this->registered.size() << std::endl;
     std::cout << " Channels: " << this->channels.size() << std::endl;
     std::cout << " Requests received: " << number_of_requests << std::endl;
-    for (int i = 0; i < 80 && i < last_message.size(); i++)
+    for (unsigned int i = 0; i < 80 && i < last_message.size(); i++)
     {
         if (last_message[i] != '\t')
             std::cout << last_message[i];
