@@ -6,7 +6,7 @@
 /*   By: plopez-b <plopez-b@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 23:58:01 by plopez-b          #+#    #+#             */
-/*   Updated: 2024/05/13 23:58:01 by plopez-b         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:45:13 by plopez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ public:
     const std::string get_server() const;
     void set_is_authenticated(const bool is_authenticated);
     const bool get_is_authenticated() const;
-    void set_fd(const int fd);
+    void set_fd(int fd);
     const int get_fd() const;
     void enqueue_message(const std::string &message);
     const std::string dequeue_message();
@@ -106,13 +106,14 @@ public:
     void set_socket_manager(SocketManager *socket_manager);
     void set_registered(User *user);
     void remove_registered(const std::string &nickname);
-    std::vector<User *>::iterator get_registered(const std::string &nickname) const;
+    std::vector<User *>::const_iterator get_registered(const std::string &nickname) const;
     const bool is_registered(const std::string &nickname) const;
     void set_channel(Channel *c);
     void remove_channel(const std::string &topic);
-    std::vector<Channel *>::iterator get_channel(const std::string &topic) const;
+    std::vector<Channel *>::const_iterator get_channel(const std::string &topic) const;
     const bool is_channel(const std::string &topic) const;
-    std::vector<User *>::iterator get_user_by_fd(const int fd) const;
+    std::vector<User *>::const_iterator get_user_by_fd(int fd) const;
+    void end_user_connection(int fd);
     void print_server_status(const std::string &last_message) const;
 };
 
@@ -150,10 +151,10 @@ public:
     void loop();
 };
 
-std::vector<User *>::iterator get_user_by_nickname(
+std::vector<User *>::const_iterator get_user_by_nickname(
     std::vector<User *> v, const std::string &nickname
     );
-std::vector<Channel *>::iterator get_channel_by_topic(
+std::vector<Channel *>::const_iterator get_channel_by_topic(
     std::vector<Channel *> c, const std::string &topic
     );
 void down_command(Command *c, Server *s, User *u);
