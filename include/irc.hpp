@@ -141,14 +141,14 @@ private:
     SocketManager();
     SocketManager(const SocketManager &s);
     SocketManager &operator=(const SocketManager &s);
-    void new_connection(pollfd pfd, std::vector<pollfd> &to_close);
-    void end_connection(pollfd pfd, std::vector<pollfd> &to_close);
-    void receive_message(pollfd pfd, std::vector<pollfd> &to_close);
-    void send_messages(pollfd pfd, std::vector<pollfd> &to_close);
 public:
     SocketManager(int port, Server &server);
     ~SocketManager();
     void loop();
+    void new_connection(pollfd pfd, std::vector<pollfd> &to_close);
+    void end_connection(pollfd pfd, std::vector<pollfd> &to_close);
+    void receive_message(pollfd pfd, std::vector<pollfd> &to_close);
+    void send_messages(pollfd pfd, std::vector<pollfd> &to_close);
 };
 
 std::vector<User *>::iterator get_user_by_nickname(
@@ -172,6 +172,7 @@ void topic_command(Command *c, Server *s, User *u);
 void up_command(Command *c, Server *s, User *u);
 void user_command(Command *c, Server *s, User *u);
 void who_command(Command *c, Server *s, User *u);
-int get_port_number(char *arg);
+std::vector<std::string> split(
+    const std::string &s, char del, bool include_delimiter);
 
 #endif
