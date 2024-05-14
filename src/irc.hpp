@@ -84,12 +84,15 @@ public:
     const bool is_invitation(std::string &nickname) const;
 };
 
+class SocketManager;
+
 class Server
 {
 private:
     std::string server_name, server_version, pass;
     std::vector<User *> registered;
     std::vector<Channel *> channels;
+    SocketManager *socket_manager;
     Server();
     Server(const Server &s);
     Server &operator=(const Server &s);
@@ -99,6 +102,7 @@ public:
     const std::string get_server_name() const;
     const std::string get_server_version() const;
     const std::string get_pass() const;
+    void set_socket_manager(SocketManager *socket_manager);
     void set_registered(User *user);
     void remove_registered(std::string &nickname);
     std::vector<User *>::iterator get_registered(std::string &nickname) const;
