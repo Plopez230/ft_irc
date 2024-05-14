@@ -48,7 +48,7 @@ public:
     const std::string get_server() const;
     void set_is_authenticated(const bool is_authenticated);
     const bool get_is_authenticated() const;
-    void set_fd(int fd);
+    void set_fd(const int fd);
     const int get_fd() const;
     void enqueue_message(const std::string &message);
     const std::string dequeue_message();
@@ -66,7 +66,7 @@ private:
 public:
     Channel();
     ~Channel();
-    void set_topic(const std::string topic);
+    void set_topic(const std::string &topic);
     const std::string get_topic() const;
     void set_mode(int mode);
     void unset_mode(int mode);
@@ -112,8 +112,8 @@ public:
     void remove_channel(const std::string &topic);
     std::vector<Channel *>::const_iterator get_channel(const std::string &topic) const;
     const bool is_channel(const std::string &topic) const;
-    std::vector<User *>::const_iterator get_user_by_fd(int fd) const;
-    void end_user_connection(int fd);
+    std::vector<User *>::const_iterator get_user_by_fd(const int fd) const;
+    void end_user_connection(const int fd);
     void print_server_status(const std::string &last_message) const;
 };
 
@@ -126,7 +126,7 @@ private:
     Command(const Command &c);
     Command &operator=(const Command &c);
 public:
-    Command(std::string message);
+    Command(const std::string &message);
     ~Command();
     void run_command(Server *s, User *u);
 };
@@ -172,6 +172,6 @@ void topic_command(Command *c, Server *s, User *u);
 void up_command(Command *c, Server *s, User *u);
 void user_command(Command *c, Server *s, User *u);
 void who_command(Command *c, Server *s, User *u);
-uint16_t get_port_number(const char *arg);
+uint16_t get_port_number(char *arg);
 
 #endif
