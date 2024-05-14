@@ -113,7 +113,6 @@ public:
     std::vector<Channel *>::iterator get_channel(const std::string &topic) const;
     const bool is_channel(const std::string &topic) const;
     std::vector<User *>::iterator get_user_by_fd(const int fd) const;
-    void end_user_connection(const int fd);
     void print_server_status(const std::string &last_message) const;
 };
 
