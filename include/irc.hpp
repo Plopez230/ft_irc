@@ -135,6 +135,7 @@ public:
     Command(const std::string &message);
     ~Command();
     void run_command(Server *s, User *u);
+    std::vector<std::string> &get_arguments();
 };
 
 extern bool running;
