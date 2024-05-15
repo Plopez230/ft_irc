@@ -13,8 +13,8 @@
 #ifndef REPLIES_HPP
 #define REPLIES_HPP
 
-#define ERR_UNKNOWNCOMMAND_421(command_name, server, user) \
+#define ERR_UNKNOWNCOMMAND_421(command, server, user) \
     ":" + (server)->get_server_name() + " 421 " + (user)->get_nickname() \
-    + (command_name) + " :Unknown command"
+    + (command)->get_arguments().at(0) + " :Unknown command"
 
 #endif
