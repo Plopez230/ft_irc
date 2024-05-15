@@ -111,6 +111,7 @@ public:
     void set_socket_manager(SocketManager *socket_manager);
     void set_registered(User *user);
     void remove_registered(const std::string &nickname);
+    void remove_registered(int fd);
     std::vector<User *>::iterator get_registered(const std::string &nickname);
     bool is_registered(const std::string &nickname);
     void set_channel(Channel *c);
@@ -135,6 +136,8 @@ public:
     ~Command();
     void run_command(Server *s, User *u);
 };
+
+extern bool running;
 
 class SocketManager
 {

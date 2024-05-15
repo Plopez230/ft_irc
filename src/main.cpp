@@ -13,12 +13,27 @@
 #include "irc.hpp"
 #include <iostream>
 #include <csignal>
+#include <cstdio>
 
-static bool running = true;
+bool running = true;
 
 static void signal_handler(int signal)
 {
+	(void) signal;
 	running = false;
+}
+
+static int get_port_number(char *arg)
+{
+    int port_number;
+    char left;
+    if (sscanf(arg, " %u %c", &port_number, &left) != 1)
+        throw std::runtime_error("Not a port number");
+    if (port_number < 1024)
+        throw std::runtime_error("Reserved port");
+    if (port_number < 1 || port_number > 65535)
+        throw std::runtime_error("Port out of range");
+    return port_number;
 }
 
 int main (int argc, char **argv)

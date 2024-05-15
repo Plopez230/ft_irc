@@ -15,6 +15,7 @@
 #include <cstring>
 #include <unistd.h>
 #include <fcntl.h>
+#include <iostream>
 
 SocketManager::SocketManager(int port, Server &server):
     port(port),
@@ -43,19 +44,15 @@ SocketManager::SocketManager(int port, Server &server):
 
 SocketManager::~SocketManager()
 {
-    std::vector<pollfd> to_close;
     std::vector<pollfd>::iterator i = this->pollfds.begin();
     for (; i < this->pollfds.end(); i++)
-        to_close.push_back(*i);
-    i = to_close.begin();
-    for (; i < to_close.end(); i++)
-        this->end_connection(*i);
+        close((*i).fd);
 }
 
 void SocketManager::loop()
 {
     std::vector<pollfd> to_close;
-    if (poll(&(this->pollfds)[0], this->pollfds.size(), -1) == -1)
+    if (!running || poll(&(this->pollfds)[0], this->pollfds.size(), -1) == -1)
         throw std::runtime_error("Poll function failed");
     for (size_t i = 0; i < this->pollfds.size(); i++)
     {
@@ -90,8 +87,9 @@ void SocketManager::new_connection(pollfd pfd)
     pollfd new_pollfd = {client_socket, POLLIN | POLLOUT, 0};
     this->pollfds.push_back(new_pollfd);
     User *new_user = new User();
-    new_user->set_fd(new_pollfd.fd);
+    new_user->set_fd(client_socket);
     this->server.set_registered(new_user);
+    this->server.print_server_status("");
 }
 
 void SocketManager::end_connection(pollfd pfd)
@@ -103,8 +101,8 @@ void SocketManager::end_connection(pollfd pfd)
         if (i != pollfds.end()) {
             close((*i).fd);
             pollfds.erase(i);
-            User *user = *this->server.get_user_by_fd(pfd.fd);
-            this->server.remove_registered(user->get_nickname());
+            this->server.remove_registered(pfd.fd);
+            this->server.print_server_status("");
         }
     }
 }
@@ -136,6 +134,8 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
 void SocketManager::send_messages(pollfd pfd, std::vector<pollfd> &to_close)
 {
     User *user = *this->server.get_user_by_fd(pfd.fd);
+    if (!user)
+        return;
     while (user->has_queued_messages())
     {
         std::string message = user->dequeue_message();

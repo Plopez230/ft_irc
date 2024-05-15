@@ -19,13 +19,7 @@ User::User()
 }
 
 User::~User()
-{
-	
-}
-
-User::User(const User &u)
-{
-}
+{}
 
 void	User::set_nickname(const std::string &nickname)
 {
@@ -84,6 +78,16 @@ void	User::set_is_authenticated(const bool is_authenticated)
 bool	User::get_is_authenticated() const
 {
 	return this->is_authenticated;
+}
+
+void	User::set_input_buffer(const std::string &input_buffer)
+{
+	this->input_buffer = input_buffer;
+}
+
+const std::string	User::get_input_buffer() const
+{
+	return this->input_buffer;
 }
 
 void	User::set_fd(int fd)
