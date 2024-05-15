@@ -136,7 +136,7 @@ void Server::print_server_status(const std::string &last_message) const
         number_of_requests ++;
         printed_message = last_message;
     }
-    std::cout << "\033[4A";
+    std::cout << "\r\033[4A";
     std::cout << "\033[KClients connected:   \033[1;32m" 
             << this->registered.size() << "\033[0m" << std::endl;
     std::cout << "\033[KChannels:            \033[1;32m" 
