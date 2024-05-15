@@ -69,6 +69,11 @@ Command::Command(const std::string &message)
 Command::~Command()
 {}
 
+std::vector<std::string> &Command::get_arguments()
+{
+    return this->arguments;
+}
+
 void Command::run_command(Server *s, User *u)
 {
     s->print_server_status(this->message);
@@ -105,5 +110,5 @@ void Command::run_command(Server *s, User *u)
     // else if (this->arguments[0] == "WHO")
     //     who_command(this, s, u);
     // else
-        u->enqueue_message(ERR_UNKNOWNCOMMAND_421(this->arguments[0], s, u));
+        u->enqueue_message(ERR_UNKNOWNCOMMAND_421(this, s, u));
 }
