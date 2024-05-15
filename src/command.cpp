@@ -76,7 +76,7 @@ std::vector<std::string> &Command::get_arguments()
 
 void Command::run_command(Server *s, User *u)
 {
-    s->print_server_status(this->message);
+    // s->print_server_status(this->message);
     if (this->arguments.size() == 0)
         return;
     // if (this->arguments[0] == "DOWN")

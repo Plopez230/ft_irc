@@ -12,6 +12,7 @@
 
 #include "irc.hpp"
 #include <iostream>
+#include <fstream>
 #include <csignal>
 #include <cstdio>
 
@@ -36,12 +37,23 @@ static int get_port_number(char *arg)
     return port_number;
 }
 
+static void print_file(const std::string &filename)
+{
+	std::ifstream file(filename);
+	// file.open(filename);
+	// std::string content;
+	// file >> content;
+	std::cout << file.rdbuf();
+	file.close();
+}
+
 int main (int argc, char **argv)
 {
 	try
 	{
 		if (argc != 3)
 			throw std::runtime_error("gooby pls");
+		print_file("./assets/logo.txt");
 		std::signal(SIGINT, &signal_handler);
 		std::signal(SIGTERM, &signal_handler);
 		Server server(argv[2]);

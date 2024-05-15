@@ -15,6 +15,6 @@
 
 #define ERR_UNKNOWNCOMMAND_421(command, server, user) \
     ":" + (server)->get_server_name() + " 421 " + (user)->get_nickname() \
-    + (command)->get_arguments().at(0) + " :Unknown command"
+    + (command)->get_arguments().at(0) + " :Unknown command\n"
 
 #endif
