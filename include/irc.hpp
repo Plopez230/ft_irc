@@ -18,6 +18,7 @@
 #include <queue>
 #include <poll.h>
 #include <arpa/inet.h>
+#include <stdexcept>
 
 #define BUFFER_SIZE 10000
 
@@ -138,8 +139,6 @@ public:
     std::vector<std::string> &get_arguments();
 };
 
-extern bool running;
-
 class SocketManager
 {
 private:
@@ -159,6 +158,20 @@ public:
     void end_connection(pollfd pfd);
     void receive_message(pollfd pfd, std::vector<pollfd> &to_close);
     void send_messages(pollfd pfd, std::vector<pollfd> &to_close);
+};
+
+class CloseConnection: public std::runtime_error
+{
+public:
+    CloseConnection(const std::string &what);
+    ~CloseConnection();
+};
+
+class StopServer: public std::runtime_error
+{
+public:
+    StopServer(const std::string &what);
+    ~StopServer();
 };
 
 std::vector<User *>::iterator get_user_by_nickname(

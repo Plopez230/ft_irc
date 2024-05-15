@@ -47,12 +47,13 @@ SocketManager::~SocketManager()
     std::vector<pollfd>::iterator i = this->pollfds.begin();
     for (; i < this->pollfds.end(); i++)
         close((*i).fd);
+    close(this->manager_fd);
 }
 
 void SocketManager::loop()
 {
     std::vector<pollfd> to_close;
-    if (!running || poll(&(this->pollfds)[0], this->pollfds.size(), -1) == -1)
+    if (poll(&(this->pollfds)[0], this->pollfds.size(), -1) == -1)
         throw std::runtime_error("Poll function failed");
     for (size_t i = 0; i < this->pollfds.size(); i++)
     {
@@ -125,7 +126,14 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
             u_msg_buffer = u_msg_buffer.substr(
                 end_of_command + 1, u_msg_buffer.size() - end_of_command - 1);
             Command command(command_string);
-            command.run_command(&this->server, user);
+            try
+            {
+                command.run_command(&this->server, user);
+            }
+            catch (CloseConnection &c)
+            {
+                to_close.push_back(pfd);
+            }
         }
         user->set_input_buffer(u_msg_buffer);
     }
@@ -145,3 +153,17 @@ void SocketManager::send_messages(pollfd pfd, std::vector<pollfd> &to_close)
         }
     }
 }
+
+CloseConnection::CloseConnection(const std::string &what):
+    std::runtime_error(what)
+{}
+
+CloseConnection::~CloseConnection()
+{}
+
+StopServer::StopServer(const std::string &what):
+    std::runtime_error(what)
+{}
+
+StopServer::~StopServer()
+{}

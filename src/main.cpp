@@ -16,12 +16,10 @@
 #include <csignal>
 #include <cstdio>
 
-bool running = true;
-
 static void signal_handler(int signal)
 {
 	(void) signal;
-	running = false;
+	throw StopServer("Stopping...");
 }
 
 static int get_port_number(char *arg)
@@ -40,9 +38,6 @@ static int get_port_number(char *arg)
 static void print_file(const std::string &filename)
 {
 	std::ifstream file(filename);
-	// file.open(filename);
-	// std::string content;
-	// file >> content;
 	std::cout << file.rdbuf();
 	file.close();
 }
@@ -58,8 +53,24 @@ int main (int argc, char **argv)
 		std::signal(SIGTERM, &signal_handler);
 		Server server(argv[2]);
 		SocketManager socket_manager(get_port_number(argv[1]), server);
-		while (running)
-			socket_manager.loop();
+		while (true)
+		{
+			try
+			{
+				socket_manager.loop();
+			}
+			catch(const StopServer& e)
+			{
+				server.print_server_status(
+					std::string("\033[1;31m") + e.what());
+				break;
+			}
+			catch(const std::runtime_error& e)
+			{
+				server.print_server_status(
+					std::string("\033[1;31m") + e.what());
+			}
+		}
 	}
 	catch(const std::exception& e)
 	{
