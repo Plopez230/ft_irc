@@ -6,13 +6,14 @@
 #    By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 11:54:06 by jariza-o          #+#    #+#              #
-#    Updated: 2024/05/14 17:52:34 by jariza-o         ###   ########.fr        #
+#    Updated: 2024/05/15 13:26:49 by jariza-o         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I./includes
+CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I./include
 
-SRC		=	src/main.cpp \
+SRC		=	src/main.cpp src/channel.cpp src/command.cpp src/server.cpp src/socket_manager.cpp \
+			src/user.cpp \
 
 OBJ		=	$(addprefix obj/, $(SRC:.cpp=.o))
 
