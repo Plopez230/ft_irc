@@ -19,6 +19,7 @@ Server::Server(const std::string &pass)
     this->server_name = "irc.free_shipping.net";
     this->server_version = "v1.0";
     this->socket_manager = NULL;
+    this->print_server_status("");
 }
 
 Server::~Server()
@@ -53,7 +54,7 @@ void Server::set_socket_manager(SocketManager *socket_manager)
 
 void Server::set_registered(User *user)
 {
-    if (user && !this->is_registered(user->get_nickname()))
+    if (user)
         this->registered.push_back(user);
 }
 
@@ -70,6 +71,11 @@ void Server::remove_registered(const std::string &nickname)
         }
         this->registered.erase(this->get_registered(nickname));
     }
+}
+
+void Server::remove_registered(int fd)
+{
+    this->registered.erase(this->get_user_by_fd(fd));
 }
 
 std::vector<User *>::iterator Server::get_registered(
