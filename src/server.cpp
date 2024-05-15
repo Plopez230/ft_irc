@@ -19,6 +19,7 @@ Server::Server(const std::string &pass)
     this->server_name = "irc.free_shipping.net";
     this->server_version = "v1.0";
     this->socket_manager = NULL;
+    std::cout << "\n\n\n\n";
     this->print_server_status("");
 }
 
@@ -128,15 +129,25 @@ std::vector<User *>::iterator Server::get_user_by_fd(int fd)
 void Server::print_server_status(const std::string &last_message) const
 {
     static int number_of_requests = 0;
+    static std::string printed_message = "";
+
     if (last_message != "")
-        number_of_requests ++;
-    std::cout << " Clients connected: " << this->registered.size() << std::endl;
-    std::cout << " Channels: " << this->channels.size() << std::endl;
-    std::cout << " Requests received: " << number_of_requests << std::endl;
-    for (unsigned int i = 0; i < 80 && i < last_message.size(); i++)
     {
-        if (last_message[i] != '\t')
-            std::cout << last_message[i];
+        number_of_requests ++;
+        printed_message = last_message;
     }
-    std::cout << std::endl << "\033[4A";
+    std::cout << "\033[4A";
+    std::cout << "\033[KClients connected:   \033[1;32m" 
+            << this->registered.size() << "\033[0m" << std::endl;
+    std::cout << "\033[KChannels:            \033[1;32m" 
+            << this->channels.size() << "\033[0m" << std::endl;
+    std::cout << "\033[KRequests received:   \033[1;32m" 
+            << number_of_requests << "\033[0m" << std::endl;
+    std::cout << "\033[K\033[1;36m";
+    for (unsigned int i = 0; i < 80 && i < printed_message.size(); i++)
+    {
+        if (printed_message[i] != '\t')
+            std::cout << printed_message[i];
+    }
+    std::cout << std::endl << "\033[0m";
 }
