@@ -14,6 +14,8 @@
 #include <stdexcept>
 #include <cstring>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 #include <fcntl.h>
 #include <iostream>
 
@@ -47,6 +49,7 @@ SocketManager::~SocketManager()
     std::vector<pollfd>::iterator i = this->pollfds.begin();
     for (; i < this->pollfds.end(); i++)
         close((*i).fd);
+    close(this->manager_fd);
 }
 
 void SocketManager::loop()
@@ -59,9 +62,9 @@ void SocketManager::loop()
         if (this->pollfds[i].revents == 0)
             continue;
         if (this->pollfds[i].revents & (POLLHUP | POLLERR | POLLNVAL))
-            to_close.push_back(this->pollfds[i]);
+            this->end_connection(this->pollfds[i]);
         else if (this->pollfds[i].fd == this->manager_fd)
-            new_connection(this->pollfds[i]);
+            this->new_connection(this->pollfds[i]);
         else
         {
             if (this->pollfds[i].revents & POLLIN)
@@ -70,9 +73,6 @@ void SocketManager::loop()
                 this->send_messages(this->pollfds[i], to_close);
         }
     }
-    std::vector<pollfd>::iterator i = to_close.begin();
-    for (; i < to_close.end(); i++)
-        this->end_connection(*i);
 }
 
 void SocketManager::new_connection(pollfd pfd)
@@ -84,7 +84,7 @@ void SocketManager::new_connection(pollfd pfd)
         throw std::runtime_error("Unable to accept connection");
     if (fcntl(client_socket, F_SETFL, O_NONBLOCK) < 0)
         throw std::runtime_error("Unable to set nonblocking socket");
-    pollfd new_pollfd = {client_socket, POLLIN | POLLOUT, 0};
+    pollfd new_pollfd = {client_socket, POLLIN, 0};
     this->pollfds.push_back(new_pollfd);
     User *new_user = new User();
     new_user->set_fd(client_socket);
@@ -100,9 +100,9 @@ void SocketManager::end_connection(pollfd pfd)
             ++i;
         if (i != pollfds.end()) {
             close((*i).fd);
-            pollfds.erase(i);
-            this->server.remove_registered(pfd.fd);
+            this->server.remove_registered((*i).fd);
             this->server.print_server_status("");
+            pollfds.erase(i);
         }
     }
 }
@@ -113,7 +113,7 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
     std::memset(message_buffer, '\0', BUFFER_SIZE);
     int readBytes = recv(pfd.fd, message_buffer, BUFFER_SIZE - 1, 0);
     if (readBytes <= 0)
-        to_close.push_back(pfd);
+        this->end_connection(pfd);
     else
     {
         User *user = *this->server.get_user_by_fd(pfd.fd);
@@ -139,8 +139,8 @@ void SocketManager::send_messages(pollfd pfd, std::vector<pollfd> &to_close)
     while (user->has_queued_messages())
     {
         std::string message = user->dequeue_message();
-        if (send(pfd.fd, message.c_str(), message.size(), 0) < 0) {
-            to_close.push_back(pfd);
+        if (send(pfd.fd, message.c_str(), message.size(), MSG_NOSIGNAL) < 0) {
+            this->end_connection(pfd);
             break;
         }
     }
