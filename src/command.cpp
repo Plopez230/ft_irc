@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "irc.hpp"
-#include "replies.hpp"
 
 static std::string remove_delimiters(std::string &s)
 {
@@ -79,6 +78,12 @@ void Command::run_command(Server *s, User *u)
     s->print_server_status(this->message);
     if (this->arguments.size() == 0)
         return;
+    if (this->arguments[0] == "NICK")
+         nick_command(this, s, u);
+    else if (this->arguments[0] == "USER")
+        user_command(this, s, u);
+    else if (this->arguments[0] == "PASS")
+        pass_command(this, s, u);
     // if (this->arguments[0] == "DOWN")
     //     down_command(this, s, u);
     // else if (this->arguments[0] == "INVITE")
@@ -89,14 +94,10 @@ void Command::run_command(Server *s, User *u)
     //     kick_command(this, s, u);
     // else if (this->arguments[0] == "MODE")
     //     mode_command(this, s, u);
-    // else if (this->arguments[0] == "NICK")
-    //     nick_command(this, s, u);
     // else if (this->arguments[0] == "NOTICE")
     //     notice_command(this, s, u);
     // else if (this->arguments[0] == "PART")
     //     part_command(this, s, u);
-    // else if (this->arguments[0] == "PASS")
-    //     pass_command(this, s, u);
     // else if (this->arguments[0] == "PRIVMSG")
     //     privmsg_command(this, s, u);
     // else if (this->arguments[0] == "QUIT")
@@ -105,10 +106,8 @@ void Command::run_command(Server *s, User *u)
     //     topic_command(this, s, u);
     // else if (this->arguments[0] == "UP")
     //     up_command(this, s, u);
-    // else if (this->arguments[0] == "USER")
-    //     user_command(this, s, u);
     // else if (this->arguments[0] == "WHO")
     //     who_command(this, s, u);
-    // else
-        u->enqueue_message(ERR_UNKNOWNCOMMAND_421(this, s, u));
+    else
+        u->enqueue_message(err_unknowncommand(this, s, u));
 }

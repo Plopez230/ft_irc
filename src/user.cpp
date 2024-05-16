@@ -70,6 +70,16 @@ const std::string	User::get_server() const
 	return this->server;
 }
 
+void	User::set_pass(const std::string &pass)
+{
+	this->pass = pass;
+}
+
+const std::string	User::get_pass() const
+{
+	return this->pass;
+}
+
 void	User::set_is_authenticated(const bool is_authenticated)
 {
 	this->is_authenticated = is_authenticated;
@@ -126,7 +136,8 @@ std::vector<User *>::iterator	find_user_by_nickname(std::vector<User *> &v, cons
 	std::vector<User *>::iterator	pos = v.begin();
 	for (; pos != v.end(); pos++)
 	{
-		if ((*pos)->get_nickname() == nickname)
+		if (nickname_to_lower((*pos)->get_nickname())
+			== nickname_to_lower(nickname))
 			return pos;
 	}
 	return pos;
