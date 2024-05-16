@@ -158,12 +158,6 @@ CloseConnection::CloseConnection(const std::string &what):
     std::runtime_error(what)
 {}
 
-CloseConnection::~CloseConnection()
-{}
-
 StopServer::StopServer(const std::string &what):
     std::runtime_error(what)
-{}
-
-StopServer::~StopServer()
 {}

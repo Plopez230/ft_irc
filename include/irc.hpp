@@ -166,14 +166,12 @@ class CloseConnection: public std::runtime_error
 {
 public:
     CloseConnection(const std::string &what);
-    ~CloseConnection();
 };
 
 class StopServer: public std::runtime_error
 {
 public:
     StopServer(const std::string &what);
-    ~StopServer();
 };
 
 std::vector<User *>::iterator find_user_by_nickname(
@@ -212,7 +210,7 @@ std::string err_passwdmismatch(Server *s, User *u);
 std::string err_nicknameinuse(Command *c, Server *s, User *u);
 std::string err_nickcollision(Command *c, Server *s, User *u);
 std::string err_needmoreparams(Command *c, Server *s, User *u);
-std::string err_alreadyregistered(Command *c, Server *s, User *u);
+std::string err_alreadyregistered(Server *s, User *u);
 
 std::vector<std::string> split(
     const std::string &s, char del, bool include_delimiter);

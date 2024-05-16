@@ -14,7 +14,7 @@
 
 static bool is_valid_nickname(std::string &nickname)
 {
-    for (int p = 0; p < nickname.length(); p++)
+    for (size_t p = 0; p < nickname.length(); p++)
     {
         char c = nickname[p];
         if (p == 0 && !((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
@@ -33,7 +33,7 @@ static bool is_valid_nickname(std::string &nickname)
 std::string nickname_to_lower(const std::string &nickname)
 {
     std::string lower(nickname);
-    for (int p = 0; p < nickname.length(); p++)
+    for (size_t p = 0; p < nickname.length(); p++)
     {
         char c = nickname[p];
         if (c >= 'A' && c <= 'Z')
@@ -92,7 +92,7 @@ void pass_command(Command *c, Server *s, User *u)
     }
     if (u->get_is_authenticated())
     {
-        u->enqueue_message(err_alreadyregistered(c, s, u));
+        u->enqueue_message(err_alreadyregistered(s, u));
         return;
     }
     u->set_pass(c->get_arguments()[1]);
@@ -107,7 +107,7 @@ void user_command(Command *c, Server *s, User *u)
     }
     if (u->get_is_authenticated())
     {
-        u->enqueue_message(err_alreadyregistered(c, s, u));
+        u->enqueue_message(err_alreadyregistered(s, u));
         return;
     }
     u->set_username(c->get_arguments()[1]);

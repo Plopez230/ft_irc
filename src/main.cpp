@@ -37,7 +37,7 @@ static int get_port_number(char *arg)
 
 static void print_file(const std::string &filename)
 {
-	std::ifstream file(filename);
+	std::ifstream file(filename.c_str());
 	std::cout << file.rdbuf();
 	file.close();
 }
