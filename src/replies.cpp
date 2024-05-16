@@ -63,7 +63,7 @@ std::string err_needmoreparams(Command *c, Server *s, User *u)
         + " :Not enough parameters\n";
 }
 
-std::string err_alreadyregistered(Command *c, Server *s, User *u)
+std::string err_alreadyregistered(Server *s, User *u)
 {
     return err_prefix(s, u, "462") + ":You may not reregister\n";
 }
