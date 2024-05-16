@@ -66,16 +66,23 @@ public:
 class Channel
 {
 private:
-    std::string topic;
+    std::string name, topic, pass;
     int mode;
+    size_t max_users;
     std::vector<User *> operators, users, invitations;
     Channel(const Channel &c);
     Channel &operator=(const Channel &c);
 public:
     Channel();
     ~Channel();
+    void set_name(const std::string &topic);
+    const std::string get_name() const;
     void set_topic(const std::string &topic);
     const std::string get_topic() const;
+    void set_max_users(size_t max_users);
+    size_t get_max_users() const;
+    void set_pass(const std::string &pass);
+    const std::string get_pass() const;
     void set_mode(int mode);
     void unset_mode(int mode);
     bool has_mode(int mode) const;
@@ -91,6 +98,9 @@ public:
     void remove_invitation(const std::string &nickname);
     std::vector<User *>::iterator find_invitation(const std::string &nickname);
     bool is_invitation(const std::string &nickname);
+    bool is_full() const;
+    std::string get_nicknames();
+    void enqueue_message(const std::string &message);
 };
 
 class SocketManager;
@@ -199,10 +209,12 @@ void up_command(Command *c, Server *s, User *u);
 void user_command(Command *c, Server *s, User *u);
 void who_command(Command *c, Server *s, User *u);
 
+std::string user_jid(User *u);
 std::string rpl_welcome(Server *s, User *u);
 std::string rpl_yourhost(Server *s, User *u);
 std::string rpl_created(Server *s, User *u);
 std::string rpl_myinfo(Server *s, User *u);
+std::string rpl_topic(Server *s, Channel *c, User *u);
 std::string err_unknowncommand(Command *c, Server *s, User *u);
 std::string err_nonicknamegiven(Server *s, User *u);
 std::string err_erroneusnickname(Command *c, Server *s, User *u);
@@ -211,6 +223,12 @@ std::string err_nicknameinuse(Command *c, Server *s, User *u);
 std::string err_nickcollision(Command *c, Server *s, User *u);
 std::string err_needmoreparams(Command *c, Server *s, User *u);
 std::string err_alreadyregistered(Server *s, User *u);
+std::string err_inviteonlychan(Server *s, Channel *c, User *u);
+std::string err_badchannelkey(Server *s, Channel *c, User *u);
+std::string err_channelisfull(Server *s, Channel *c, User *u);
+std::string err_nosuchchannel(Server *s, const std::string &c, User *u);
+std::string rpl_namreply(Server *s, Channel *c, User *u);
+std::string rpl_endofnames(Server *s, Channel *c, User *u);
 
 std::vector<std::string> split(
     const std::string &s, char del, bool include_delimiter);
