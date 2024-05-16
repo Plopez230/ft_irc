@@ -50,6 +50,8 @@ public:
     const std::string get_host() const;
     void set_server(const std::string &server);
     const std::string get_server() const;
+    void set_pass(const std::string &server);
+    const std::string get_pass() const;
     void set_input_buffer(const std::string &input_buffer);
     const std::string get_input_buffer() const;
     void set_is_authenticated(bool is_authenticated);
@@ -180,6 +182,9 @@ std::vector<User *>::iterator find_user_by_nickname(
 std::vector<Channel *>::iterator find_channel_by_topic(
     std::vector<Channel *> &c, const std::string &topic
     );
+
+std::string nickname_to_lower(const std::string &nickname);
+
 void down_command(Command *c, Server *s, User *u);
 void invite_command(Command *c, Server *s, User *u);
 void join_command(Command *c, Server *s, User *u);
@@ -195,6 +200,20 @@ void topic_command(Command *c, Server *s, User *u);
 void up_command(Command *c, Server *s, User *u);
 void user_command(Command *c, Server *s, User *u);
 void who_command(Command *c, Server *s, User *u);
+
+std::string rpl_welcome(Server *s, User *u);
+std::string rpl_yourhost(Server *s, User *u);
+std::string rpl_created(Server *s, User *u);
+std::string rpl_myinfo(Server *s, User *u);
+std::string err_unknowncommand(Command *c, Server *s, User *u);
+std::string err_nonicknamegiven(Server *s, User *u);
+std::string err_erroneusnickname(Command *c, Server *s, User *u);
+std::string err_passwdmismatch(Server *s, User *u);
+std::string err_nicknameinuse(Command *c, Server *s, User *u);
+std::string err_nickcollision(Command *c, Server *s, User *u);
+std::string err_needmoreparams(Command *c, Server *s, User *u);
+std::string err_alreadyregistered(Command *c, Server *s, User *u);
+
 std::vector<std::string> split(
     const std::string &s, char del, bool include_delimiter);
 
