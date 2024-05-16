@@ -112,7 +112,7 @@ int	User::get_fd() const
 
 void	User::enqueue_message(const std::string &message)
 {
-	this->output_queue.push(message);
+	this->output_queue.push(message+"\n");
 }
 
 const std::string	User::dequeue_message()

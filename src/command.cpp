@@ -84,12 +84,12 @@ void Command::run_command(Server *s, User *u)
         user_command(this, s, u);
     else if (this->arguments[0] == "PASS")
         pass_command(this, s, u);
+    else if (this->arguments[0] == "JOIN")
+        join_command(this, s, u);
     // if (this->arguments[0] == "DOWN")
     //     down_command(this, s, u);
     // else if (this->arguments[0] == "INVITE")
     //     invite_command(this, s, u);
-    // else if (this->arguments[0] == "JOIN")
-    //     join_command(this, s, u);
     // else if (this->arguments[0] == "KICK")
     //     kick_command(this, s, u);
     // else if (this->arguments[0] == "MODE")

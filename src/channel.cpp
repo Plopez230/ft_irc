@@ -22,6 +22,41 @@ Channel::~Channel()
 	
 }
 
+void Channel::set_pass(const std::string &pass)
+{
+	this->pass = pass;
+}
+
+const std::string Channel::get_pass() const
+{
+	return this->pass;
+}
+
+void Channel::set_max_users(size_t max_users)
+{
+	this->max_users = max_users;
+}
+
+size_t Channel::get_max_users() const
+{
+	return this->max_users;
+}
+
+bool Channel::is_full() const
+{
+	return this->users.size() >= this->max_users;
+}
+
+void Channel::set_name(const std::string &name)
+{
+	this->name = name;
+}
+
+const std::string Channel::get_name() const
+{
+	return this->name;
+}
+
 void Channel::set_topic(const std::string &topic)
 {
 	this->topic = topic;
@@ -115,8 +150,30 @@ std::vector<Channel *>::iterator find_channel_by_topic(std::vector<Channel *> &c
 	std::vector<Channel *>::iterator pos = c.begin();
 	for (; pos != c.end(); pos++)
 	{
-		if ((*pos)->get_topic() == topic)
+		if ((*pos)->get_topic() == topic
+			|| (*pos)->get_name() == topic)
 			return pos;
 	}
 	return pos;
+}
+
+std::string Channel::get_nicknames()
+{
+	std::string names;
+	for (size_t i = 0; i < this->users.size(); i++)
+	{
+		if (i > 0)
+			names += " ";
+		std::string nickname = this->users[i]->get_nickname();
+		if (this->is_operator(nickname))
+			names += "@";
+		names += nickname;
+	}
+	return names;
+}
+
+void Channel::enqueue_message(const std::string &message)
+{
+	for (size_t i = 0; i < this->users.size(); i++)
+		this->users[i]->enqueue_message(message);
 }
