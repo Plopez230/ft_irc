@@ -89,7 +89,7 @@ void SocketManager::new_connection(pollfd pfd)
     this->pollfds.push_back(new_pollfd);
     User *new_user = new User();
     new_user->set_fd(client_socket);
-    this->server.set_registered(new_user);
+    this->server.add_registered(new_user);
     this->server.print_server_status("");
 }
 
@@ -117,7 +117,7 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
         to_close.push_back(pfd);
     else
     {
-        User *user = *this->server.get_user_by_fd(pfd.fd);
+        User *user = *this->server.find_user_by_fd(pfd.fd);
         std::string u_msg_buffer = user->get_input_buffer() + message_buffer;
         size_t end_of_command = u_msg_buffer.find("\n");
         if (end_of_command != std::string::npos)
@@ -141,7 +141,7 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
 
 void SocketManager::send_messages(pollfd pfd, std::vector<pollfd> &to_close)
 {
-    User *user = *this->server.get_user_by_fd(pfd.fd);
+    User *user = *this->server.find_user_by_fd(pfd.fd);
     if (!user)
         return;
     while (user->has_queued_messages())
