@@ -77,17 +77,17 @@ public:
     void set_mode(int mode);
     void unset_mode(int mode);
     bool has_mode(int mode) const;
-    void set_operator(User *user);
+    void add_operator(User *user);
     void remove_operator(const std::string &nickname);
-    std::vector<User *>::iterator get_operator(const std::string &nickname);
+    std::vector<User *>::iterator find_operator(const std::string &nickname);
     bool is_operator(const std::string &nickname);
-    void set_user(User *user);
+    void add_user(User *user);
     void remove_user(const std::string &nickname);
-    std::vector<User *>::iterator get_user(const std::string &nickname);
+    std::vector<User *>::iterator find_user(const std::string &nickname);
     bool is_user(const std::string &nickname);
-    void set_invitation(User *user);
+    void add_invitation(User *user);
     void remove_invitation(const std::string &nickname);
-    std::vector<User *>::iterator get_invitation(const std::string &nickname);
+    std::vector<User *>::iterator find_invitation(const std::string &nickname);
     bool is_invitation(const std::string &nickname);
 };
 
@@ -110,16 +110,16 @@ public:
     const std::string get_server_version() const;
     const std::string get_pass() const;
     void set_socket_manager(SocketManager *socket_manager);
-    void set_registered(User *user);
+    void add_registered(User *user);
     void remove_registered(const std::string &nickname);
     void remove_registered(int fd);
-    std::vector<User *>::iterator get_registered(const std::string &nickname);
+    std::vector<User *>::iterator find_registered(const std::string &nickname);
     bool is_registered(const std::string &nickname);
-    void set_channel(Channel *c);
+    void add_channel(Channel *c);
     void remove_channel(const std::string &topic);
-    std::vector<Channel *>::iterator get_channel(const std::string &topic);
+    std::vector<Channel *>::iterator find_channel(const std::string &topic);
     bool is_channel(const std::string &topic);
-    std::vector<User *>::iterator get_user_by_fd(int fd);
+    std::vector<User *>::iterator find_user_by_fd(int fd);
     void end_user_connection(int fd);
     void print_server_status(const std::string &last_message) const;
 };
@@ -174,10 +174,10 @@ public:
     ~StopServer();
 };
 
-std::vector<User *>::iterator get_user_by_nickname(
+std::vector<User *>::iterator find_user_by_nickname(
     std::vector<User *> &v, const std::string &nickname
     );
-std::vector<Channel *>::iterator get_channel_by_topic(
+std::vector<Channel *>::iterator find_channel_by_topic(
     std::vector<Channel *> &c, const std::string &topic
     );
 void down_command(Command *c, Server *s, User *u);

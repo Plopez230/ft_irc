@@ -121,7 +121,7 @@ bool	User::has_queued_messages() const
 	return false;
 }
 
-std::vector<User *>::iterator	get_user_by_nickname(std::vector<User *> &v, const std::string &nickname)
+std::vector<User *>::iterator	find_user_by_nickname(std::vector<User *> &v, const std::string &nickname)
 {
 	std::vector<User *>::iterator	pos = v.begin();
 	for (; pos != v.end(); pos++)
