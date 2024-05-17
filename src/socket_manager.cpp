@@ -11,14 +11,9 @@
 /* ************************************************************************** */
 
 #include "irc.hpp"
-#include <stdexcept>
 #include <cstring>
 #include <unistd.h>
 #include <fcntl.h>
-#include <iostream>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
 
 SocketManager::SocketManager(char *port, Server &server):
     port(port),
@@ -194,21 +189,17 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
 
         std::string u_msg_buffer = user->get_input_buffer() + message_buffer;
         size_t end_of_command = 0;
-        int delimiter_length = 0;
 
         while (end_of_command != std::string::npos)
         {
-            end_of_command = u_msg_buffer.find("\n");
-            if (end_of_command > 0 && u_msg_buffer[end_of_command - 1] == '\r')
-            {
-                delimiter_length = 1;
-            }
+            end_of_command = u_msg_buffer.find_first_of("\r\n");
 
             std::string command_string = u_msg_buffer.substr(0,
-                end_of_command - delimiter_length);
+                end_of_command);
+
             u_msg_buffer = u_msg_buffer.substr(
                 end_of_command + 1,
-                u_msg_buffer.size() - end_of_command - 1 - delimiter_length);
+                u_msg_buffer.size() - end_of_command - 1);
 
             Command command(command_string);
             try
@@ -236,7 +227,6 @@ void SocketManager::send_messages(pollfd pfd, std::vector<pollfd> &to_close)
     while (user->has_queued_messages())
     {
         std::string message = user->dequeue_message();
-        std::cerr << message << std::endl;
 
         if (send(pfd.fd, message.c_str(), message.size(), 0) < 0)
         {

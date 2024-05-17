@@ -19,6 +19,7 @@ Server::Server(const std::string &pass)
     this->server_name = "irc.free_shipping.net";
     this->server_version = "v1.0";
     this->socket_manager = NULL;
+    
     std::cout << "\n\n\n\n";
     this->print_server_status("");
 }
@@ -27,10 +28,15 @@ Server::~Server()
 {
     for (std::vector<User *>::iterator u = this->registered.begin();
         u != this->registered.end(); u++)
+    {
         delete *u;
+    }
+
     for (std::vector<Channel *>::iterator c = this->channels.begin();
         c != this->channels.end(); c++)
+    {
         delete *c;
+    }
 }
 
 const std::string Server::get_server_name() const
@@ -56,7 +62,9 @@ void Server::set_socket_manager(SocketManager *socket_manager)
 void Server::add_registered(User *user)
 {
     if (user)
+    {
         this->registered.push_back(user);
+    }
 }
 
 void Server::remove_registered(const std::string &nickname)
@@ -70,6 +78,7 @@ void Server::remove_registered(const std::string &nickname)
             (*c)->remove_operator(nickname);
             (*c)->remove_user(nickname);
         }
+
         this->registered.erase(this->find_registered(nickname));
     }
 }
@@ -93,7 +102,9 @@ bool Server::is_registered(const std::string &nickname)
 void Server::add_channel(Channel *c)
 {
     if (c && !this->is_channel(c->get_topic()))
+    {
         this->channels.push_back(c);
+    }
 }
 
 void Server::remove_channel(const std::string &topic)
@@ -123,6 +134,7 @@ std::vector<User *>::iterator Server::find_user_by_fd(int fd)
         if ((*u)->get_fd() == fd)
             return u;
     }
+
     return this->registered.end();
 }
 
@@ -136,6 +148,7 @@ void Server::print_server_status(const std::string &last_message) const
         number_of_requests ++;
         printed_message = last_message;
     }
+
     std::cout   << "\r\033[4A"
                 << "\033[KClients connected:   \033[1;32m" 
                 << this->registered.size() << "\033[0m" << std::endl
@@ -144,10 +157,14 @@ void Server::print_server_status(const std::string &last_message) const
                 << "\033[KRequests received:   \033[1;32m" 
                 << number_of_requests << "\033[0m" << std::endl
                 << "\033[K\033[1;36m";
+
     for (unsigned int i = 0; i < 80 && i < printed_message.size(); i++)
     {
         if (printed_message[i] != '\t')
+        {
             std::cout << printed_message[i];
+        }
     }
+
     std::cout << std::endl << "\033[0m";
 }

@@ -17,8 +17,8 @@
 #include <vector>
 #include <queue>
 #include <poll.h>
-#include <arpa/inet.h>
 #include <stdexcept>
+#include <netdb.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -36,7 +36,7 @@ class User
 {
 private:
     std::string nickname, username, realname, host, server, input_buffer, pass;
-    bool is_authenticated;
+    bool is_registered;
     int fd;
     std::queue<std::string> output_queue;
     User(const User &u);
@@ -58,8 +58,8 @@ public:
     const std::string get_pass() const;
     void set_input_buffer(const std::string &input_buffer);
     const std::string get_input_buffer() const;
-    void set_is_authenticated(bool is_authenticated);
-    bool get_is_authenticated() const;
+    void set_is_registered(bool is_registered);
+    bool get_is_registered() const;
     void set_fd(int fd);
     int get_fd() const;
     void enqueue_message(const std::string &message);
@@ -161,7 +161,6 @@ private:
     std::vector<pollfd> pollfds;
     char *port;
     int manager_fd;
-
     struct addrinfo hints;
     struct addrinfo *res;
     Server &server;
