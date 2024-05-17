@@ -22,19 +22,6 @@ static void signal_handler(int signal)
 	throw StopServer("Stopping...");
 }
 
-static int get_port_number(char *arg)
-{
-    int port_number;
-    char left;
-    if (sscanf(arg, " %u %c", &port_number, &left) != 1)
-        throw std::runtime_error("Not a port number");
-    if (port_number < 1024)
-        throw std::runtime_error("Reserved port");
-    if (port_number < 1 || port_number > 65535)
-        throw std::runtime_error("Port out of range");
-    return port_number;
-}
-
 static void print_file(const std::string &filename)
 {
 	std::ifstream file(filename.c_str());
@@ -52,7 +39,7 @@ int main (int argc, char **argv)
 		std::signal(SIGINT, &signal_handler);
 		std::signal(SIGTERM, &signal_handler);
 		Server server(argv[2]);
-		SocketManager socket_manager(get_port_number(argv[1]), server);
+		SocketManager socket_manager(argv[1], server);
 		while (true)
 		{
 			try

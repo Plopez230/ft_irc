@@ -75,20 +75,20 @@ std::string err_alreadyregistered(Server *s, User *u)
 
 std::string rpl_welcome(Server *s, User *u)
 {
-    return err_prefix(s, u, "001") + "Welcome to the Internet Relay Network :"
+    return err_prefix(s, u, "001") + ":Welcome to the Internet Relay Network :"
         + u->get_nickname() + "!" + u->get_username() + "@" 
         + u->get_host();
 }
 
 std::string rpl_yourhost(Server *s, User *u)
 {
-    return err_prefix(s, u, "002") + "Your host is " + u->get_server()
+    return err_prefix(s, u, "002") + ":Your host is " + u->get_server()
         + ", running version " + s->get_server_version();
 }
 
 std::string rpl_created(Server *s, User *u)
 {
-    return err_prefix(s, u, "003") + "This server was created today :)";
+    return err_prefix(s, u, "003") + ":This server was created today :)";
 }
 
 std::string rpl_myinfo(Server *s, User *u)
