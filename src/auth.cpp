@@ -54,6 +54,7 @@ static void authenticate(Server *s, User *u)
             throw CloseConnection("Bad password");
         }
         u->set_is_authenticated(true);
+        u->enqueue_message(":" + user_jid(u) + " NICK " + u->get_nickname());
         u->enqueue_message(rpl_welcome(s, u));
         u->enqueue_message(rpl_yourhost(s, u));
         u->enqueue_message(rpl_created(s, u));

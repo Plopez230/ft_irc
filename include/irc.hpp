@@ -19,8 +19,12 @@
 #include <poll.h>
 #include <arpa/inet.h>
 #include <stdexcept>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
 
 #define BUFFER_SIZE 10000
+#define MAX_CONNECTIONS 32
 
 #define MODE_I 1
 #define MODE_K 2
@@ -155,15 +159,17 @@ class SocketManager
 {
 private:
     std::vector<pollfd> pollfds;
-    int port;
+    char *port;
     int manager_fd;
-    sockaddr_in address;
+
+    struct addrinfo hints;
+    struct addrinfo *res;
     Server &server;
     SocketManager();
     SocketManager(const SocketManager &s);
     SocketManager &operator=(const SocketManager &s);
 public:
-    SocketManager(int port, Server &server);
+    SocketManager(char *port, Server &server);
     ~SocketManager();
     void loop();
     void new_connection(pollfd pfd);
