@@ -20,11 +20,19 @@ std::string user_jid(User *u)
 static std::string err_prefix(Server *s, User *u, const std::string &id)
 {
     std::string msg = ":" + s->get_server_name() + " " + id;
+
     if (u->get_nickname() != "")
+    {
         msg += " " + u->get_nickname();
+    }
+
     else
+    {
         msg += " *";
+    }
+
     msg += " ";
+    
     return msg;
 }
 

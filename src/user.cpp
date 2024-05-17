@@ -80,14 +80,14 @@ const std::string	User::get_pass() const
 	return this->pass;
 }
 
-void	User::set_is_authenticated(const bool is_authenticated)
+void	User::set_is_registered(const bool is_authenticated)
 {
-	this->is_authenticated = is_authenticated;
+	this->is_registered = is_authenticated;
 }
 
-bool	User::get_is_authenticated() const
+bool	User::get_is_registered() const
 {
-	return this->is_authenticated;
+	return this->is_registered;
 }
 
 void	User::set_input_buffer(const std::string &input_buffer)
@@ -131,7 +131,8 @@ bool	User::has_queued_messages() const
 	return false;
 }
 
-std::vector<User *>::iterator	find_user_by_nickname(std::vector<User *> &v, const std::string &nickname)
+std::vector<User *>::iterator	find_user_by_nickname(std::vector<User *> &v,
+	const std::string &nickname)
 {
 	std::vector<User *>::iterator	pos = v.begin();
 	for (; pos != v.end(); pos++)
