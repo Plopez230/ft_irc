@@ -144,12 +144,14 @@ void Command::run_command(Server *s, User *u)
     {
         part_command(this, s, u);
     }
+    else if (this->arguments[0] == "KICK")
+    {
+        kick_command(this, s, u);
+    }
     // if (this->arguments[0] == "DOWN")
     //     down_command(this, s, u);
     // else if (this->arguments[0] == "INVITE")
     //     invite_command(this, s, u);
-    // else if (this->arguments[0] == "KICK")
-    //     kick_command(this, s, u);
     // else if (this->arguments[0] == "NOTICE")
     //     notice_command(this, s, u);
     // else if (this->arguments[0] == "TOPIC")
