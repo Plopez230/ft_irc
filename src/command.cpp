@@ -136,6 +136,10 @@ void Command::run_command(Server *s, User *u)
     {
         quit_command(this, s, u);
     }
+    else if (this->arguments[0] == "PRIVMSG")
+    {
+        privmsg_command(this, s, u);
+    }
     // if (this->arguments[0] == "DOWN")
     //     down_command(this, s, u);
     // else if (this->arguments[0] == "INVITE")
