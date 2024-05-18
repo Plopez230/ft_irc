@@ -15,6 +15,8 @@
 
 User::User()
 {
+	this->is_registered = false;
+	// this->fd = -1;
 	// ASIGNAR LOS STRINGS COMO CADENAS VACIAS
 }
 
