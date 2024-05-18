@@ -71,6 +71,8 @@ void Server::remove_registered(const std::string &nickname)
 {
     if (this->is_registered(nickname))
     {
+        User *u = *this->find_registered(nickname);
+
         for (std::vector<Channel *>::iterator c = this->channels.begin();
             c < this->channels.end(); c++)
         {
@@ -80,12 +82,16 @@ void Server::remove_registered(const std::string &nickname)
         }
 
         this->registered.erase(this->find_registered(nickname));
+        delete u;
     }
 }
 
 void Server::remove_registered(int fd)
 {
+    User *user = *this->find_user_by_fd(fd);
+
     this->registered.erase(this->find_user_by_fd(fd));
+    delete user;
 }
 
 std::vector<User *>::iterator Server::find_registered(
@@ -111,7 +117,10 @@ void Server::remove_channel(const std::string &topic)
 {
     if (this->is_channel(topic))
     {
+        Channel *channel = *this->find_channel(topic);
+
         this->channels.erase(this->find_channel(topic));
+        delete channel;
     }
 }
 
@@ -140,6 +149,7 @@ std::vector<User *>::iterator Server::find_user_by_fd(int fd)
 
 void Server::print_server_status(const std::string &last_message) const
 {
+    return;
     static int number_of_requests = 0;
     static std::string printed_message = "";
 
