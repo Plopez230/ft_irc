@@ -159,7 +159,7 @@ std::string err_unknownmode(Server *s, User *u, char mode)
 std::string rpl_channelmodeis(Server *s, Channel *c, User *u,
     const std::string &mode)
 {
-    return err_prefix(s, u, "324") + " " + c->get_name() + " " + mode;
+    return err_prefix(s, u, "324") + c->get_name() + " " + mode;
 }
 
 std::string err_keyset(Server *s, Channel *c, User *u)
