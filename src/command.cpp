@@ -94,9 +94,14 @@ Command::Command(const std::string &message)
 Command::~Command()
 {}
 
-std::vector<std::string> &Command::get_arguments()
+const std::string &Command::argument(size_t position)
 {
-    return this->arguments;
+    return this->arguments[position];
+}
+
+size_t Command::size()
+{
+    return this->arguments.size();
 }
 
 const std::string &Command::get_message() const
@@ -148,16 +153,12 @@ void Command::run_command(Server *s, User *u)
     {
         kick_command(this, s, u);
     }
-    // if (this->arguments[0] == "DOWN")
-    //     down_command(this, s, u);
     // else if (this->arguments[0] == "INVITE")
     //     invite_command(this, s, u);
-    // else if (this->arguments[0] == "NOTICE")
-    //     notice_command(this, s, u);
     // else if (this->arguments[0] == "TOPIC")
     //     topic_command(this, s, u);
-    // else if (this->arguments[0] == "UP")
-    //     up_command(this, s, u);
+    // else if (this->arguments[0] == "NOTICE")
+    //     notice_command(this, s, u);
     // else if (this->arguments[0] == "WHO")
     //     who_command(this, s, u);
     else

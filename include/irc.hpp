@@ -154,8 +154,9 @@ public:
     Command(const std::string &message);
     ~Command();
     void run_command(Server *s, User *u);
-    std::vector<std::string> &get_arguments();
     const std::string &get_message() const;
+    const std::string &argument(size_t position);
+    size_t size();
 };
 
 class Tracer
@@ -216,10 +217,9 @@ std::vector<Channel *>::iterator find_channel_by_topic(
 
 std::string to_lower(const std::string &nickname);
 bool is_valid_channel_name(const std::string &channel_name);
-bool is_valid_nickname(std::string &nickname);
+bool is_valid_nickname(const std::string &nickname);
 void register_user(Server *s, User *u);
 
-void down_command(Command *c, Server *s, User *u);
 void invite_command(Command *c, Server *s, User *u);
 void join_command(Command *c, Server *s, User *u);
 void kick_command(Command *c, Server *s, User *u);
@@ -231,7 +231,6 @@ void pass_command(Command *c, Server *s, User *u);
 void privmsg_command(Command *c, Server *s, User *u);
 void quit_command(Command *c, Server *s, User *u);
 void topic_command(Command *c, Server *s, User *u);
-void up_command(Command *c, Server *s, User *u);
 void user_command(Command *c, Server *s, User *u);
 void who_command(Command *c, Server *s, User *u);
 

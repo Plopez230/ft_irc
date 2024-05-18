@@ -14,7 +14,7 @@
 
 void pass_command(Command *c, Server *s, User *u)
 {
-    if (c->get_arguments().size() < 2)
+    if (c->size() < 2)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
         return;
@@ -26,5 +26,5 @@ void pass_command(Command *c, Server *s, User *u)
         return;
     }
 
-    u->set_pass(c->get_arguments()[1]);
+    u->set_pass(c->argument(1));
 }

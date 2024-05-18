@@ -87,7 +87,7 @@ static void mode_command_modify_k(Command *c, Server *s, Channel *channel,
 {
     if (flag_sign)
     {
-        if (c->get_arguments().size() <= argument_pos)
+        if (c->size() <= argument_pos)
         {
             u->enqueue_message(err_needmoreparams(c, s, u));
             return;
@@ -99,7 +99,7 @@ static void mode_command_modify_k(Command *c, Server *s, Channel *channel,
             return;
         }
 
-        std::string channel_key = c->get_arguments()[argument_pos];
+        std::string channel_key = c->argument(argument_pos);
 
         channel->set_mode(MODE_K);
         channel->set_pass(channel_key);
@@ -121,13 +121,13 @@ static void mode_command_modify_l(Command *c, Server *s, Channel *channel,
 {
     if (flag_sign)
     {
-        if (c->get_arguments().size() <= argument_pos)
+        if (c->size() <= argument_pos)
         {
             u->enqueue_message(err_needmoreparams(c, s, u));
             return;
         }
 
-        std::string argument = c->get_arguments()[argument_pos];
+        std::string argument = c->argument(argument_pos);
         size_t channel_limit;
 
         if (!sscanf(argument.c_str(), " %lu", &channel_limit))
@@ -153,13 +153,13 @@ static void mode_command_modify_l(Command *c, Server *s, Channel *channel,
 static void mode_command_modify_o(Command *c, Server *s, Channel *channel,
     User *u, bool flag_sign, size_t argument_pos)
 {
-    if (c->get_arguments().size() <= argument_pos)
+    if (c->size() <= argument_pos)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
         return;
     }
     
-    std::string nickname = c->get_arguments()[argument_pos];
+    std::string nickname = c->argument(argument_pos);
 
     if (!s->is_registered(nickname))
     {
@@ -193,7 +193,7 @@ static void mode_command_modify(Command *c, Server *s, Channel *channel,
         return;
     }
 
-    std::string mode_string = c->get_arguments()[2];
+    std::string mode_string = c->argument(2);
     bool flag_sign = true;
     size_t argument_pos = 3;
 
@@ -246,13 +246,13 @@ static void mode_command_modify(Command *c, Server *s, Channel *channel,
 
 void mode_command(Command *c, Server *s, User *u)
 {
-    if (c->get_arguments().size() < 2)
+    if (c->size() < 2)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
         return;
     }
 
-    std::string channel_name = c->get_arguments()[1];
+    std::string channel_name = c->argument(1);
 
     if (!is_valid_channel_name(channel_name))
     {
@@ -274,7 +274,7 @@ void mode_command(Command *c, Server *s, User *u)
         return;
     }
 
-    else if (c->get_arguments().size() == 2)
+    else if (c->size() == 2)
     {
         mode_command_query(s, channel, u);
         return;

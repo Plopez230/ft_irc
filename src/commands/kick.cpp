@@ -14,13 +14,13 @@
 
 void kick_command(Command *c, Server *s, User *u)
 {
-    if (c->get_arguments().size() < 3)
+    if (c->size() < 3)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
         return;
     }
 
-    std::string channel_name = c->get_arguments()[1];
+    std::string channel_name = c->argument(1);
 
     if (!s->is_channel(channel_name))
     {
@@ -36,7 +36,7 @@ void kick_command(Command *c, Server *s, User *u)
         return;
     }
 
-    std::string username = c->get_arguments()[2];
+    std::string username = c->argument(2);
 
     if (!channel->is_user(username))
     {

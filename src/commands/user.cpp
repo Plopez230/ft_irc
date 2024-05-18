@@ -14,7 +14,7 @@
 
 void user_command(Command *c, Server *s, User *u)
 {
-    if (c->get_arguments().size() < 5)
+    if (c->size() < 5)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
         return;
@@ -26,9 +26,9 @@ void user_command(Command *c, Server *s, User *u)
         return;
     }
 
-    u->set_username(c->get_arguments()[1]);
-    u->set_host(c->get_arguments()[2]);
-    u->set_server(c->get_arguments()[3]);
-    u->set_realname(c->get_arguments()[4]);
+    u->set_username(c->argument(1));
+    u->set_host(c->argument(2));
+    u->set_server(c->argument(3));
+    u->set_realname(c->argument(4));
     register_user(s, u);
 }
