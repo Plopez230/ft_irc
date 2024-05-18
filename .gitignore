@@ -40,3 +40,6 @@ ircserv
 *.exe
 *.out
 *.app
+
+# Trace log
+trace.log

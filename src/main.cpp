@@ -12,7 +12,6 @@
 
 #include "irc.hpp"
 #include <iostream>
-#include <fstream>
 #include <csignal>
 #include <cstdio>
 
