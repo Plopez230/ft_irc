@@ -111,7 +111,9 @@ void Channel::add_user(User *user)
 void Channel::remove_user(const std::string &nickname)
 {
 	if (this->is_user(nickname))
-		this->users.erase(this->find_operator(nickname));
+	{
+		this->users.erase(this->find_user(nickname));
+	}
 }
 
 std::vector<User *>::iterator Channel::find_user(const std::string &nickname)
