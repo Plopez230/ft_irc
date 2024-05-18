@@ -225,14 +225,12 @@ void join_command(Command *c, Server *s, User *u);
 void kick_command(Command *c, Server *s, User *u);
 void mode_command(Command *c, Server *s, User *u);
 void nick_command(Command *c, Server *s, User *u);
-void notice_command(Command *c, Server *s, User *u);
 void part_command(Command *c, Server *s, User *u);
 void pass_command(Command *c, Server *s, User *u);
 void privmsg_command(Command *c, Server *s, User *u);
 void quit_command(Command *c, Server *s, User *u);
 void topic_command(Command *c, Server *s, User *u);
 void user_command(Command *c, Server *s, User *u);
-void who_command(Command *c, Server *s, User *u);
 
 std::string user_jid(User *u);
 std::string rpl_welcome(Server *s, User *u);

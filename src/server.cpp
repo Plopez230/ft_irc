@@ -149,7 +149,6 @@ std::vector<User *>::iterator Server::find_user_by_fd(int fd)
 
 void Server::print_server_status(const std::string &last_message) const
 {
-    return;
     static int number_of_requests = 0;
     static std::string printed_message = "";
 

@@ -189,12 +189,10 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
 		User *user = *this->server.find_user_by_fd(pfd.fd);
 
 		std::string u_msg_buffer = user->get_input_buffer() + message_buffer;
-		size_t end_of_command = 0;
+		size_t end_of_command =  u_msg_buffer.find_first_of("\r\n");
 
 		while (end_of_command != std::string::npos)
 		{
-			end_of_command = u_msg_buffer.find_first_of("\r\n");
-
 			std::string command_string = u_msg_buffer.substr(0,
 				end_of_command);
 
@@ -213,6 +211,8 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
 			{
 				to_close.push_back(pfd);
 			}
+
+			end_of_command = u_msg_buffer.find_first_of("\r\n");
 		}
 		user->set_input_buffer(u_msg_buffer);
 	}
