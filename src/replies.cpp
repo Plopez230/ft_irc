@@ -43,7 +43,7 @@ std::string err_passwdmismatch(Server *s, User *u)
 
 std::string err_unknowncommand(Command *c, Server *s, User *u)
 {
-    return err_prefix(s, u, "421") + c->get_arguments()[0]
+    return err_prefix(s, u, "421") + c->argument(0)
         + " :Unknown command";
 }
 
@@ -54,25 +54,25 @@ std::string err_nonicknamegiven(Server *s, User *u)
 
 std::string err_erroneusnickname(Command *c, Server *s, User *u)
 {
-    return err_prefix(s, u, "432") + c->get_arguments()[1]
+    return err_prefix(s, u, "432") + c->argument(1)
         + " :Erroneus nickname";
 }
 
 std::string err_nicknameinuse(Command *c, Server *s, User *u)
 {
-    return err_prefix(s, u, "433") + c->get_arguments()[1]
+    return err_prefix(s, u, "433") + c->argument(1)
         + " :Nickname is already in use";
 }
 
 std::string err_nickcollision(Command *c, Server *s, User *u)
 {
-    return err_prefix(s, u, "436") + c->get_arguments()[1]
+    return err_prefix(s, u, "436") + c->argument(1)
         + " :Nickname collision KILL";
 }
 
 std::string err_needmoreparams(Command *c, Server *s, User *u)
 {
-    return err_prefix(s, u, "461") + c->get_arguments()[0]
+    return err_prefix(s, u, "461") + c->argument(0)
         + " :Not enough parameters";
 }
 
@@ -186,7 +186,7 @@ std::string command_reply(Command *c, User *u)
 
 std::string command_reply(Command *c, User *u, const std::string &args)
 {
-    return ":" + user_jid(u) + " " + c->get_arguments()[0] + " " + args;
+    return ":" + user_jid(u) + " " + c->argument(0) + " " + args;
 }
 
 std::string err_notexttosend(Server *s, User *u)
@@ -197,5 +197,5 @@ std::string err_notexttosend(Server *s, User *u)
 std::string err_norecipient(Command *c, Server *s, User *u)
 {
     return err_prefix(s, u, "") + ":No recipient given ("
-        + c->get_arguments()[0] + ")";
+        + c->argument(0) + ")";
 }

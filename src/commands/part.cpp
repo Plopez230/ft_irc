@@ -14,13 +14,13 @@
 
 void part_command(Command *c, Server *s, User *u)
 {
-    if (c->get_arguments().size() < 2)
+    if (c->size() < 2)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
         return;
     }
 
-    std::vector<std::string> channel_names = split(c->get_arguments()[1], ',',
+    std::vector<std::string> channel_names = split(c->argument(1), ',',
         false);
     
     for (size_t i = 0; i < channel_names.size(); i++)

@@ -72,20 +72,20 @@ static void join_channel(Server *s, User *u, const std::string &channel_name,
 
 void join_command(Command *c, Server *s, User *u)
 {
-    if (c->get_arguments().size() < 2)
+    if (c->size() < 2)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
         return;
     }
 
     std::vector<std::string> channel_names = split(
-        c->get_arguments()[1], ',', false);
+        c->argument(1), ',', false);
     
     std::vector<std::string> channel_keys;
 
-    if (c->get_arguments().size() >= 3)
+    if (c->size() >= 3)
     {
-        channel_keys = split(c->get_arguments()[2], ',', false);
+        channel_keys = split(c->argument(2), ',', false);
     }
 
     for (size_t i = 0; i < channel_names.size(); i++)

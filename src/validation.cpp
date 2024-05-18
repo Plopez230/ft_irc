@@ -17,7 +17,7 @@ bool is_valid_channel_name(const std::string &channel_name)
     return channel_name.length() > 2 && channel_name[0] == '#';
 }
 
-bool is_valid_nickname(std::string &nickname)
+bool is_valid_nickname(const std::string &nickname)
 {
     if (nickname.length() < 1 || nickname.length() > MAX_NICKNAME_LENGTH)
     {

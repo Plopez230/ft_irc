@@ -14,15 +14,15 @@
 
 void privmsg_command(Command *c, Server *s, User *u)
 {
-    if (c->get_arguments().size() < 3)
+    if (c->size() < 3)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
         return;
     }
 
-    std::vector<std::string> receivers = split(c->get_arguments()[1], ',',
+    std::vector<std::string> receivers = split(c->argument(1), ',',
         false);
-    std::string message = c->get_arguments()[2];
+    std::string message = c->argument(2);
 
     if (message.length() == 0)
     {
