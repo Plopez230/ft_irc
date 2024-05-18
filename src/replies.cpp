@@ -137,7 +137,7 @@ std::string err_nosuchchannel(Server *s, const std::string &c, User *u)
 std::string rpl_namreply(Server *s, Channel *c, User *u)
 {
     return err_prefix(s, u, "353") + "= " + c->get_name()
-        + " : " + c->get_nicknames();
+        + " :" + c->get_nicknames();
 }
 
 std::string rpl_endofnames(Server *s, Channel *c, User *u)
