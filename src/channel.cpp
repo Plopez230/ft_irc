@@ -177,3 +177,14 @@ void Channel::enqueue_message(const std::string &message)
 	for (size_t i = 0; i < this->users.size(); i++)
 		this->users[i]->enqueue_message(message);
 }
+
+void Channel::enqueue_message(const std::string &message, User *except)
+{
+	for (size_t i = 0; i < this->users.size(); i++)
+	{
+		if (except != this->users[i])
+		{
+			this->users[i]->enqueue_message(message);
+		}
+	}
+}

@@ -188,3 +188,14 @@ std::string command_reply(Command *c, User *u, const std::string &args)
 {
     return ":" + user_jid(u) + " " + c->get_arguments()[0] + " " + args;
 }
+
+std::string err_notexttosend(Server *s, User *u)
+{
+    return err_prefix(s, u, "412") + ":No text to send";
+}
+
+std::string err_norecipient(Command *c, Server *s, User *u)
+{
+    return err_prefix(s, u, "") + ":No recipient given ("
+        + c->get_arguments()[0] + ")";
+}

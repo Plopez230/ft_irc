@@ -106,6 +106,7 @@ public:
     bool is_full() const;
     std::string get_nicknames();
     void enqueue_message(const std::string &message);
+    void enqueue_message(const std::string &message, User *except);
 };
 
 class SocketManager;
@@ -263,6 +264,8 @@ std::string err_nosuchnick(Server *s, User *u, const std::string &nickname);
 std::string err_chanoprivsneeded(Server *s, Channel *c, User *u);
 std::string command_reply(Command *c, User *u);
 std::string command_reply(Command *c, User *u, const std::string &args);
+std::string err_notexttosend(Server *s, User *u);
+std::string err_norecipient(Command *c, Server *s, User *u);
 
 std::vector<std::string> split(
     const std::string &s, char del, bool include_delimiter);
