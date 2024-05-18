@@ -13,8 +13,10 @@
 CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I./include
 
 SRC		=	src/main.cpp src/channel.cpp src/command.cpp src/server.cpp \
-			src/socket_manager.cpp src/user.cpp src/registration.cpp \
-			src/replies.cpp src/join.cpp
+			src/socket_manager.cpp src/user.cpp src/commands/nick.cpp \
+			src/replies.cpp src/commands/join.cpp src/commands/mode.cpp \
+			src/commands/pass.cpp src/commands/user.cpp src/validation.cpp \
+			src/tracer.cpp
 
 OBJ		=	$(addprefix obj/, $(SRC:.cpp=.o))
 

@@ -112,7 +112,7 @@ int	User::get_fd() const
 
 void	User::enqueue_message(const std::string &message)
 {
-	this->output_queue.push(message+"\n");
+	this->output_queue.push(message);
 }
 
 const std::string	User::dequeue_message()
@@ -137,8 +137,8 @@ std::vector<User *>::iterator	find_user_by_nickname(std::vector<User *> &v,
 	std::vector<User *>::iterator	pos = v.begin();
 	for (; pos != v.end(); pos++)
 	{
-		if (nickname_to_lower((*pos)->get_nickname())
-			== nickname_to_lower(nickname))
+		if (to_lower((*pos)->get_nickname())
+			== to_lower(nickname))
 			return pos;
 	}
 	return pos;

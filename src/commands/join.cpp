@@ -12,11 +12,6 @@
 
 #include "irc.hpp"
 
-bool is_valid_channel_name(const std::string &channel_name)
-{
-    return channel_name.length() > 2 && channel_name[0] == '#';
-}
-
 static void join_channel(Server *s, User *u, const std::string &channel_name,
     const std::string &channel_key)
 {

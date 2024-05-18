@@ -22,15 +22,16 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <fstream>
 
 #define BUFFER_SIZE 10000
 #define MAX_CONNECTIONS 32
+#define MAX_NICKNAME_LENGTH 9
 
 #define MODE_I 1
 #define MODE_K 2
 #define MODE_L 4
-#define MODE_O 8
-#define MODE_T 16
+#define MODE_T 8
 
 class User
 {
@@ -153,6 +154,20 @@ public:
     ~Command();
     void run_command(Server *s, User *u);
     std::vector<std::string> &get_arguments();
+    const std::string &get_message() const;
+};
+
+class Tracer
+{
+private:
+    std::ofstream *file;
+    Tracer(Tracer const &t);
+    Tracer &operator=(Tracer const &t);
+public:
+    Tracer();
+    ~Tracer();
+    void trace_output(int fd, std::string msg);
+    void trace_input(int fd, std::string msg);
 };
 
 class SocketManager
@@ -164,6 +179,7 @@ private:
     struct addrinfo hints;
     struct addrinfo *res;
     Server &server;
+    Tracer tracer;
     SocketManager();
     SocketManager(const SocketManager &s);
     SocketManager &operator=(const SocketManager &s);
@@ -196,7 +212,10 @@ std::vector<Channel *>::iterator find_channel_by_topic(
     std::vector<Channel *> &c, const std::string &topic
     );
 
-std::string nickname_to_lower(const std::string &nickname);
+std::string to_lower(const std::string &nickname);
+bool is_valid_channel_name(const std::string &channel_name);
+bool is_valid_nickname(std::string &nickname);
+void register_user(Server *s, User *u);
 
 void down_command(Command *c, Server *s, User *u);
 void invite_command(Command *c, Server *s, User *u);
@@ -234,6 +253,15 @@ std::string err_channelisfull(Server *s, Channel *c, User *u);
 std::string err_nosuchchannel(Server *s, const std::string &c, User *u);
 std::string rpl_namreply(Server *s, Channel *c, User *u);
 std::string rpl_endofnames(Server *s, Channel *c, User *u);
+std::string err_notonchannel(Server *s, User *u, const std::string &ch);
+std::string err_unknownmode(Server *s, User *u, char mode);
+std::string rpl_channelmodeis(Server *s, Channel *c, User *u,
+    const std::string &mode);
+std::string err_keyset(Server *s, Channel *c, User *u);
+std::string err_nosuchnick(Server *s, User *u, const std::string &nickname);
+std::string err_chanoprivsneeded(Server *s, Channel *c, User *u);
+std::string command_reply(Command *c, User *u);
+std::string command_reply(Command *c, User *u, const std::string &args);
 
 std::vector<std::string> split(
     const std::string &s, char del, bool include_delimiter);

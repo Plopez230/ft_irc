@@ -145,3 +145,46 @@ std::string rpl_endofnames(Server *s, Channel *c, User *u)
     return err_prefix(s, u, "366") + c->get_name()
         + " :End of NAMES list";
 }
+
+std::string err_notonchannel(Server *s, User *u, const std::string &ch)
+{
+    return err_prefix(s, u, "442") + ch + " :You're not on that channel";
+}
+
+std::string err_unknownmode(Server *s, User *u, char mode)
+{
+    return err_prefix(s, u, "472") + mode + " :is unknown mode char to me";
+}
+
+std::string rpl_channelmodeis(Server *s, Channel *c, User *u,
+    const std::string &mode)
+{
+    return err_prefix(s, u, "324") + " " + c->get_name() + " " + mode;
+}
+
+std::string err_keyset(Server *s, Channel *c, User *u)
+{
+    return err_prefix(s, u, "467") + c->get_name()
+        + " :Channel key already set";
+}
+
+std::string err_nosuchnick(Server *s, User *u, const std::string &nickname)
+{
+    return err_prefix(s, u, "401") + nickname + " :No such nick/channel";
+}
+
+std::string err_chanoprivsneeded(Server *s, Channel *c, User *u)
+{
+    return err_prefix(s, u, "482") + c->get_name()
+        + " :You're not channel operator";
+}
+
+std::string command_reply(Command *c, User *u)
+{
+    return ":" + user_jid(u) + " " + c->get_message();
+}
+
+std::string command_reply(Command *c, User *u, const std::string &args)
+{
+    return ":" + user_jid(u) + " " + c->get_arguments()[0] + " " + args;
+}

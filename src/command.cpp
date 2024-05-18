@@ -99,10 +99,15 @@ std::vector<std::string> &Command::get_arguments()
     return this->arguments;
 }
 
+const std::string &Command::get_message() const
+{
+    return this->message;
+}
+
 void Command::run_command(Server *s, User *u)
 {
     s->print_server_status(this->message);
-    
+
     if (this->arguments.size() == 0)
     {
         return;
@@ -123,14 +128,16 @@ void Command::run_command(Server *s, User *u)
     {
         join_command(this, s, u);
     }
+    else if (this->arguments[0] == "MODE")
+    {
+        mode_command(this, s, u);
+    }
     // if (this->arguments[0] == "DOWN")
     //     down_command(this, s, u);
     // else if (this->arguments[0] == "INVITE")
     //     invite_command(this, s, u);
     // else if (this->arguments[0] == "KICK")
     //     kick_command(this, s, u);
-    // else if (this->arguments[0] == "MODE")
-    //     mode_command(this, s, u);
     // else if (this->arguments[0] == "NOTICE")
     //     notice_command(this, s, u);
     // else if (this->arguments[0] == "PART")
