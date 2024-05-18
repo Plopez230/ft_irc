@@ -132,6 +132,10 @@ void Command::run_command(Server *s, User *u)
     {
         mode_command(this, s, u);
     }
+    else if (this->arguments[0] == "QUIT")
+    {
+        quit_command(this, s, u);
+    }
     // if (this->arguments[0] == "DOWN")
     //     down_command(this, s, u);
     // else if (this->arguments[0] == "INVITE")
