@@ -168,6 +168,7 @@ public:
     ~Tracer();
     void trace_output(int fd, std::string msg);
     void trace_input(int fd, std::string msg);
+    void end_connection(int fd);
 };
 
 class SocketManager

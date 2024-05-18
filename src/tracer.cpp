@@ -28,7 +28,7 @@ void Tracer::trace_input(int fd, std::string msg)
 {
     if (msg != "")
     {
-        *this->file << fd << ">>" << msg << std::endl;
+        *this->file << ">" << fd << ":" << msg << std::endl;
     }
 }
 
@@ -36,6 +36,11 @@ void Tracer::trace_output(int fd, std::string msg)
 {
     if (msg != "")
     {
-        *this->file << fd << "<<" << msg << std::endl;
+        *this->file << "<" << fd << ":" << msg << std::endl;
     }
+}
+
+void Tracer::end_connection(int fd)
+{
+    *this->file << "x" << fd << ":" << std::endl;
 }

@@ -163,6 +163,7 @@ void SocketManager::end_connection(pollfd pfd)
 
 		if (i != pollfds.end())
 		{
+			this->tracer.end_connection(pfd.fd);
 			close((*i).fd);
 			pollfds.erase(i);
 			this->server.remove_registered(pfd.fd);
