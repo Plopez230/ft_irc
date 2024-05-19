@@ -91,6 +91,15 @@ void Server::remove_registered(int fd)
 {
     User *user = this->find_registered(fd);
 
+    for (size_t i = 0; i < this->channels.size(); i++)
+    {
+        Channel *c = this->channels[i];
+
+        c->remove_invitation(user->get_nickname());
+        c->remove_user(user->get_nickname());
+        c->remove_operator(user->get_nickname());
+    }
+
     this->registered.erase(find_user_by_fd(this->registered, fd));
     delete user;
 }
