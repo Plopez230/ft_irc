@@ -15,6 +15,6 @@
 void quit_command(Command *c, Server *s, User *u)
 {
     (void) s;
-    u->enqueue_message(command_reply(c, u));
+    s->enqueue_message_in_user_channels(command_reply(c, u), u);
     throw CloseConnection("Quit");
 }
