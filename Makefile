@@ -17,7 +17,8 @@ SRC		=	src/main.cpp src/channel.cpp src/command.cpp src/server.cpp \
 			src/replies.cpp src/commands/join.cpp src/commands/mode.cpp \
 			src/commands/pass.cpp src/commands/user.cpp src/validation.cpp \
 			src/tracer.cpp src/commands/quit.cpp src/commands/privmsg.cpp \
-			src/commands/part.cpp src/commands/kick.cpp
+			src/commands/part.cpp src/commands/kick.cpp \
+			src/commands/invite.cpp
 
 OBJ		=	$(addprefix obj/, $(SRC:.cpp=.o))
 

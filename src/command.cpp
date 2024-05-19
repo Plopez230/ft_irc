@@ -153,8 +153,10 @@ void Command::run_command(Server *s, User *u)
     {
         kick_command(this, s, u);
     }
-    // else if (this->arguments[0] == "INVITE")
-    //     invite_command(this, s, u);
+    else if (this->arguments[0] == "INVITE")
+    {
+        invite_command(this, s, u);
+    }
     // else if (this->arguments[0] == "TOPIC")
     //     topic_command(this, s, u);
     // else if (this->arguments[0] == "NOTICE")
