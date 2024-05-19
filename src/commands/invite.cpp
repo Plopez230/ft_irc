@@ -60,4 +60,5 @@ void invite_command(Command *c, Server *s, User *u)
 
     channel->add_invitation(user);
     u->enqueue_message(rpl_inviting(s, channel, u, user));
+    user->enqueue_message(command_reply(c, u));
 }
