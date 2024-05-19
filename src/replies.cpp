@@ -196,6 +196,17 @@ std::string err_notexttosend(Server *s, User *u)
 
 std::string err_norecipient(Command *c, Server *s, User *u)
 {
-    return err_prefix(s, u, "") + ":No recipient given ("
+    return err_prefix(s, u, "411") + ":No recipient given ("
         + c->argument(0) + ")";
+}
+
+std::string rpl_inviting(Server *s, Channel *c, User *u, User *user)
+{
+    return err_prefix(s, u, "341") + c->get_name() + " " + user->get_nickname();
+}
+
+std::string err_useronchannel(Server *s, Channel *c, User *u, User *user)
+{
+    return err_prefix(s, u, "443") + c->get_name() + " " + user->get_nickname()
+        + " :is already on channel";
 }

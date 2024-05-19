@@ -263,6 +263,8 @@ std::string command_reply(Command *c, User *u);
 std::string command_reply(Command *c, User *u, const std::string &args);
 std::string err_notexttosend(Server *s, User *u);
 std::string err_norecipient(Command *c, Server *s, User *u);
+std::string rpl_inviting(Server *s, Channel *c, User *u, User *user);
+std::string err_useronchannel(Server *s, Channel *c, User *u, User *user);
 
 std::vector<std::string> split(
     const std::string &s, char del, bool include_delimiter);
