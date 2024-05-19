@@ -34,7 +34,7 @@ static void join_channel(Server *s, User *u, const std::string &channel_name,
         s->add_channel(channel);
 
         u->enqueue_message(":" + user_jid(u) + " JOIN :" + channel_name);
-        u->enqueue_message(rpl_topic(s, channel, u));
+        u->enqueue_message(rpl_notopic(s, channel, u));
         u->enqueue_message(rpl_namreply(s, channel, u));
         u->enqueue_message(rpl_endofnames(s, channel, u));
 
@@ -65,7 +65,7 @@ static void join_channel(Server *s, User *u, const std::string &channel_name,
     channel->add_user(u);
 
     u->enqueue_message(":" + user_jid(u) + " JOIN :" + channel_name);
-    u->enqueue_message(rpl_notopic(s, channel, u));
+    u->enqueue_message(rpl_topic(s, channel, u));
     u->enqueue_message(rpl_namreply(s, channel, u));
     u->enqueue_message(rpl_endofnames(s, channel, u));
 }
