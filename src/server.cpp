@@ -180,7 +180,8 @@ void Server::print_server_status(const std::string &last_message) const
     std::cout << std::endl << "\033[0m";
 }
 
-void Server::enqueue_message_in_user_channels(const std::string &msg, User *user)
+void Server::enqueue_message_in_user_channels(
+    const std::string &msg, User *user)
 {
     for (size_t i = 0; i < this->channels.size(); i++)
     {
