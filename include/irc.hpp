@@ -153,6 +153,7 @@ public:
     bool is_channel(const std::string &topic);
     void end_user_connection(int fd);
     void print_server_status(const std::string &last_message) const;
+    void enqueue_message_in_user_channels(const std::string &msg, User *user);
 };
 
 // ./src/command.cpp
