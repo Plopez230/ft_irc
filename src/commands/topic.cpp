@@ -47,16 +47,16 @@ void topic_command(Command *c, Server *s, User *u)
 
         std::string topic = c->argument(2);
         channel->set_topic(topic);
-        u->enqueue_message(command_reply(c, u));
+        channel->enqueue_message(command_reply(c, u));
     }
 
     if (channel->get_topic() == "")
     {
-        u->enqueue_message(rpl_notopic(s, channel, u));
+        channel->enqueue_message(rpl_notopic(s, channel, u));
     }
 
     else
     {
-        u->enqueue_message(rpl_topic(s, channel, u));
+        channel->enqueue_message(rpl_topic(s, channel, u));
     }
 }
