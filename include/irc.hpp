@@ -24,7 +24,7 @@
 #include <netdb.h>
 #include <fstream>
 
-#define BUFFER_SIZE 10000
+#define BUFFER_SIZE 1024
 #define MAX_CONNECTIONS 32
 #define MAX_NICKNAME_LENGTH 9
 
