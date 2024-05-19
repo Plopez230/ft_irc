@@ -210,3 +210,8 @@ std::string err_useronchannel(Server *s, Channel *c, User *u, User *user)
     return err_prefix(s, u, "443") + c->get_name() + " " + user->get_nickname()
         + " :is already on channel";
 }
+
+std::string rpl_notopic(Server *s, Channel *c, User *u)
+{
+    return err_prefix(s, u, "331") + c->get_name() + " :No topic is set";
+}

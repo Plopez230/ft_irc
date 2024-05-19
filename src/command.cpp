@@ -117,52 +117,62 @@ void Command::run_command(Server *s, User *u)
     {
         return;
     }
+
     if (this->arguments[0] == "NICK")
     {
         nick_command(this, s, u);
     }
+
     else if (this->arguments[0] == "USER")
     {
         user_command(this, s, u);
     }
+
     else if (this->arguments[0] == "PASS")
     {
         pass_command(this, s, u);
     }
+
     else if (this->arguments[0] == "JOIN")
     {
         join_command(this, s, u);
     }
+
     else if (this->arguments[0] == "MODE")
     {
         mode_command(this, s, u);
     }
+
     else if (this->arguments[0] == "QUIT")
     {
         quit_command(this, s, u);
     }
+
     else if (this->arguments[0] == "PRIVMSG")
     {
         privmsg_command(this, s, u);
     }
+
     else if (this->arguments[0] == "PART")
     {
         part_command(this, s, u);
     }
+
     else if (this->arguments[0] == "KICK")
     {
         kick_command(this, s, u);
     }
+
     else if (this->arguments[0] == "INVITE")
     {
         invite_command(this, s, u);
     }
-    // else if (this->arguments[0] == "TOPIC")
-    //     topic_command(this, s, u);
-    // else if (this->arguments[0] == "NOTICE")
-    //     notice_command(this, s, u);
-    // else if (this->arguments[0] == "WHO")
-    //     who_command(this, s, u);
+
+    else if (this->arguments[0] == "TOPIC")
+    {
+        topic_command(this, s, u);
+    }
+    
     else
     {
         u->enqueue_message(err_unknowncommand(this, s, u));
