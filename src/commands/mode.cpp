@@ -167,7 +167,7 @@ static void mode_command_modify_o(Command *c, Server *s, Channel *channel,
         return;
     }
 
-    User *to_op = *s->find_registered(nickname);
+    User *to_op = s->find_registered(nickname);
 
     if (flag_sign && !channel->is_operator(nickname))
     {
@@ -266,7 +266,7 @@ void mode_command(Command *c, Server *s, User *u)
         return;
     }
 
-    Channel *channel = *s->find_channel(channel_name);
+    Channel *channel = s->find_channel(channel_name);
 
     if (!channel->is_user(u->get_nickname()))
     {

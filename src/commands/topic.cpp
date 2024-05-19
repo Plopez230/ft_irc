@@ -28,7 +28,7 @@ void topic_command(Command *c, Server *s, User *u)
         return;
     }
 
-    Channel *channel = *s->find_channel(channel_name);
+    Channel *channel = s->find_channel(channel_name);
 
     if (!channel->is_user(u->get_nickname()))
     {

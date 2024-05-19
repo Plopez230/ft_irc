@@ -28,7 +28,7 @@ void invite_command(Command *c, Server *s, User *u)
         return;
     }
 
-    Channel *channel = *s->find_channel(channel_name);
+    Channel *channel = s->find_channel(channel_name);
 
     if (!channel->is_operator(u->get_nickname()))
     {
@@ -50,7 +50,7 @@ void invite_command(Command *c, Server *s, User *u)
         return;
     }
 
-    User *user = *s->find_registered(nickname);
+    User *user = s->find_registered(nickname);
 
     if (channel->is_user(nickname))
     {

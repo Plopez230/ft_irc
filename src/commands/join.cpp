@@ -41,7 +41,7 @@ static void join_channel(Server *s, User *u, const std::string &channel_name,
         return;
     }
 
-    channel = *s->find_channel(channel_name);
+    channel = s->find_channel(channel_name);
 
     if (channel->has_mode(MODE_I) && !channel->is_invitation(u->get_nickname()))
     {

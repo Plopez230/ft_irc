@@ -31,7 +31,7 @@ void part_command(Command *c, Server *s, User *u)
             continue;
         }
 
-        Channel *channel = *s->find_channel(channel_names[i]);
+        Channel *channel = s->find_channel(channel_names[i]);
 
         if (!channel->is_user(u->get_nickname()))
         {
