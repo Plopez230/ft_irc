@@ -44,7 +44,8 @@ void kick_command(Command *c, Server *s, User *u)
         return;
     }
 
-    User *user = channel->find_user(username);
-    user->enqueue_message(command_reply(c, u));
+    channel->enqueue_message(command_reply(c, u));
     channel->remove_user(username);
+    channel->remove_invitation(username);
+    channel->remove_operator(username);
 }
