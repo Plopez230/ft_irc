@@ -71,7 +71,7 @@ void Server::remove_registered(const std::string &nickname)
 {
     if (this->is_registered(nickname))
     {
-        User *u = *this->find_registered(nickname);
+        User *u = this->find_registered(nickname);
 
         for (std::vector<Channel *>::iterator c = this->channels.begin();
             c < this->channels.end(); c++)
@@ -81,28 +81,34 @@ void Server::remove_registered(const std::string &nickname)
             (*c)->remove_user(nickname);
         }
 
-        this->registered.erase(this->find_registered(nickname));
+        this->registered.erase(
+            find_user_by_nickname(this->registered, nickname));
         delete u;
     }
 }
 
 void Server::remove_registered(int fd)
 {
-    User *user = *this->find_user_by_fd(fd);
+    User *user = this->find_registered(fd);
 
-    this->registered.erase(this->find_user_by_fd(fd));
+    this->registered.erase(find_user_by_fd(this->registered, fd));
     delete user;
 }
 
-std::vector<User *>::iterator Server::find_registered(
-    const std::string &nickname)
+User *Server::find_registered(const std::string &nickname)
 {
-    return find_user_by_nickname(this->registered, nickname);
+    return *find_user_by_nickname(this->registered, nickname);
+}
+
+User *Server::find_registered(int fd)
+{
+    return *find_user_by_fd(this->registered, fd);
 }
 
 bool Server::is_registered(const std::string &nickname)
 {
-    return this->find_registered(nickname) != this->registered.end();
+    return find_user_by_nickname(this->registered, nickname)
+        != this->registered.end();
 }
 
 void Server::add_channel(Channel *c)
@@ -117,34 +123,21 @@ void Server::remove_channel(const std::string &topic)
 {
     if (this->is_channel(topic))
     {
-        Channel *channel = *this->find_channel(topic);
+        Channel *channel = this->find_channel(topic);
 
-        this->channels.erase(this->find_channel(topic));
+        this->channels.erase(find_channel_by_topic(this->channels, topic));
         delete channel;
     }
 }
 
-std::vector<Channel *>::iterator Server::find_channel(
-    const std::string &topic)
+Channel *Server::find_channel(const std::string &topic)
 {
-    return find_channel_by_topic(this->channels, topic);
+    return *find_channel_by_topic(this->channels, topic);
 }
 
 bool Server::is_channel(const std::string &topic)
 {
-    return this->find_channel(topic) != this->channels.end();
-}
-
-std::vector<User *>::iterator Server::find_user_by_fd(int fd)
-{
-    for (std::vector<User *>::iterator u = this->registered.begin();
-        u != this->registered.end(); u++)
-    {
-        if ((*u)->get_fd() == fd)
-            return u;
-    }
-
-    return this->registered.end();
+    return find_channel_by_topic(this->channels, topic) != this->channels.end();
 }
 
 void Server::print_server_status(const std::string &last_message) const

@@ -28,7 +28,7 @@ void kick_command(Command *c, Server *s, User *u)
         return;
     }
 
-    Channel *channel = *s->find_channel(channel_name);
+    Channel *channel = s->find_channel(channel_name);
 
     if (!channel->is_operator(u->get_nickname()))
     {
@@ -44,7 +44,7 @@ void kick_command(Command *c, Server *s, User *u)
         return;
     }
 
-    User *user = *channel->find_user(username);
+    User *user = channel->find_user(username);
     user->enqueue_message(command_reply(c, u));
     channel->remove_user(username);
 }

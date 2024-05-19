@@ -89,14 +89,13 @@ void Channel::remove_operator(const std::string &nickname)
 {
 	if (this->is_operator(nickname))
 	{
-		this->operators.erase(this->find_operator(nickname));
+		this->operators.erase(find_user_by_nickname(this->operators, nickname));
 	}
 }
 
-std::vector<User *>::iterator Channel::find_operator(
-	const std::string &nickname)
+User *Channel::find_operator(const std::string &nickname)
 {
-	return find_user_by_nickname(this->operators, nickname);
+	return *find_user_by_nickname(this->operators, nickname);
 }
 
 bool Channel::is_operator(const std::string &nickname)
@@ -114,13 +113,13 @@ void Channel::remove_user(const std::string &nickname)
 {
 	if (this->is_user(nickname))
 	{
-		this->users.erase(this->find_user(nickname));
+		this->users.erase(find_user_by_nickname(this->users, nickname));
 	}
 }
 
-std::vector<User *>::iterator Channel::find_user(const std::string &nickname)
+User *Channel::find_user(const std::string &nickname)
 {
-	return find_user_by_nickname(this->users, nickname);
+	return *find_user_by_nickname(this->users, nickname);
 }
 
 bool Channel::is_user(const std::string &nickname)
@@ -137,14 +136,15 @@ void Channel::remove_invitation(const std::string &nickname)
 {
 	if (this->is_invitation(nickname))
 	{
-		this->invitations.erase(this->find_operator(nickname));
+		this->invitations.erase(
+			find_user_by_nickname(this->invitations, nickname));
 	}
 }
 
-std::vector<User *>::iterator Channel::find_invitation(
+User *Channel::find_invitation(
 	const std::string &nickname)
 {
-	return find_user_by_nickname(this->invitations, nickname);
+	return *find_user_by_nickname(this->invitations, nickname);
 }
 
 bool Channel::is_invitation(const std::string &nickname)

@@ -133,7 +133,7 @@ bool	User::has_queued_messages() const
 	return this->output_queue.size() > 0;
 }
 
-std::vector<User *>::iterator	find_user_by_nickname(std::vector<User *> &v,
+std::vector<User *>::iterator find_user_by_nickname(std::vector<User *> &v,
 	const std::string &nickname)
 {
 	std::vector<User *>::iterator	pos = v.begin();
@@ -147,4 +147,16 @@ std::vector<User *>::iterator	find_user_by_nickname(std::vector<User *> &v,
 		}
 	}
 	return v.end();
+}
+
+std::vector<User *>::iterator find_user_by_fd(std::vector<User *> &v, int fd)
+{
+    for (std::vector<User *>::iterator u = v.begin();
+        u != v.end(); u++)
+    {
+        if ((*u)->get_fd() == fd)
+            return u;
+    }
+
+    return v.end();
 }

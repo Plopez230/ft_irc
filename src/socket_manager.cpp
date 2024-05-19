@@ -186,7 +186,7 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
 	}
 	else
 	{
-		User *user = *this->server.find_user_by_fd(pfd.fd);
+		User *user = this->server.find_registered(pfd.fd);
 
 		std::string u_msg_buffer = user->get_input_buffer() + message_buffer;
 		size_t end_of_command =  u_msg_buffer.find_first_of("\r\n");
@@ -220,7 +220,7 @@ void SocketManager::receive_message(pollfd pfd, std::vector<pollfd> &to_close)
 
 void SocketManager::send_messages(pollfd pfd, std::vector<pollfd> &to_close)
 {
-	User *user = *this->server.find_user_by_fd(pfd.fd);
+	User *user = this->server.find_registered(pfd.fd);
 
 	if (!user)
 	{

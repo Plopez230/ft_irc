@@ -33,6 +33,8 @@
 #define MODE_L 4
 #define MODE_T 8
 
+// ./src/user.cpp
+
 class User
 {
 private:
@@ -68,6 +70,12 @@ public:
     bool has_queued_messages() const;
 };
 
+std::vector<User *>::iterator find_user_by_nickname(
+    std::vector<User *> &v, const std::string &nickname);
+std::vector<User *>::iterator find_user_by_fd(std::vector<User *> &v, int fd);
+
+// ./src/channel.cpp
+
 class Channel
 {
 private:
@@ -93,21 +101,26 @@ public:
     bool has_mode(int mode) const;
     void add_operator(User *user);
     void remove_operator(const std::string &nickname);
-    std::vector<User *>::iterator find_operator(const std::string &nickname);
+    User *find_operator(const std::string &nickname);
     bool is_operator(const std::string &nickname);
     void add_user(User *user);
     void remove_user(const std::string &nickname);
-    std::vector<User *>::iterator find_user(const std::string &nickname);
+    User *find_user(const std::string &nickname);
     bool is_user(const std::string &nickname);
     void add_invitation(User *user);
     void remove_invitation(const std::string &nickname);
-    std::vector<User *>::iterator find_invitation(const std::string &nickname);
+    User *find_invitation(const std::string &nickname);
     bool is_invitation(const std::string &nickname);
     bool is_full() const;
     std::string get_nicknames();
     void enqueue_message(const std::string &message);
     void enqueue_message(const std::string &message, User *except);
 };
+
+std::vector<Channel *>::iterator find_channel_by_topic(
+    std::vector<Channel *> &c, const std::string &topic);
+
+// ./src/server.cpp
 
 class SocketManager;
 
@@ -131,16 +144,18 @@ public:
     void add_registered(User *user);
     void remove_registered(const std::string &nickname);
     void remove_registered(int fd);
-    std::vector<User *>::iterator find_registered(const std::string &nickname);
+    User *find_registered(const std::string &nickname);
+    User *find_registered(int fd);
     bool is_registered(const std::string &nickname);
     void add_channel(Channel *c);
     void remove_channel(const std::string &topic);
-    std::vector<Channel *>::iterator find_channel(const std::string &topic);
+    Channel *find_channel(const std::string &topic);
     bool is_channel(const std::string &topic);
-    std::vector<User *>::iterator find_user_by_fd(int fd);
     void end_user_connection(int fd);
     void print_server_status(const std::string &last_message) const;
 };
+
+// ./src/command.cpp
 
 class Command
 {
@@ -159,6 +174,11 @@ public:
     size_t size();
 };
 
+std::vector<std::string> split(
+    const std::string &s, char del, bool include_delimiter);
+
+// ./src/tracer.cpp
+
 class Tracer
 {
 private:
@@ -172,6 +192,8 @@ public:
     void trace_input(int fd, std::string msg);
     void end_connection(int fd);
 };
+
+// ./src/socket_manager.cpp
 
 class SocketManager
 {
@@ -208,29 +230,58 @@ public:
     StopServer(const std::string &what);
 };
 
-std::vector<User *>::iterator find_user_by_nickname(
-    std::vector<User *> &v, const std::string &nickname
-    );
-std::vector<Channel *>::iterator find_channel_by_topic(
-    std::vector<Channel *> &c, const std::string &topic
-    );
+// ./src/validation.cpp
 
 std::string to_lower(const std::string &nickname);
 bool is_valid_channel_name(const std::string &channel_name);
 bool is_valid_nickname(const std::string &nickname);
 void register_user(Server *s, User *u);
 
+// ./src/commands/invite.cpp
+
 void invite_command(Command *c, Server *s, User *u);
+
+// ./src/commands/join.cpp
+
 void join_command(Command *c, Server *s, User *u);
+
+// ./src/commands/kick.cpp
+
 void kick_command(Command *c, Server *s, User *u);
+
+// ./src/commands/mode.cpp
+
 void mode_command(Command *c, Server *s, User *u);
+
+// ./src/commands/nick.cpp
+
 void nick_command(Command *c, Server *s, User *u);
+
+// ./src/commands/part.cpp
+
 void part_command(Command *c, Server *s, User *u);
+
+// ./src/commands/pass.cpp
+
 void pass_command(Command *c, Server *s, User *u);
+
+// ./src/commands/privmsg.cpp
+
 void privmsg_command(Command *c, Server *s, User *u);
+
+// ./src/commands/quit.cpp
+
 void quit_command(Command *c, Server *s, User *u);
+
+// ./src/commands/topic.cpp
+
 void topic_command(Command *c, Server *s, User *u);
+
+// ./src/commands/user.cpp
+
 void user_command(Command *c, Server *s, User *u);
+
+// ./src/replies.cpp
 
 std::string user_jid(User *u);
 std::string rpl_welcome(Server *s, User *u);
@@ -266,8 +317,5 @@ std::string err_norecipient(Command *c, Server *s, User *u);
 std::string rpl_inviting(Server *s, Channel *c, User *u, User *user);
 std::string err_useronchannel(Server *s, Channel *c, User *u, User *user);
 std::string rpl_notopic(Server *s, Channel *c, User *u);
-
-std::vector<std::string> split(
-    const std::string &s, char del, bool include_delimiter);
 
 #endif
