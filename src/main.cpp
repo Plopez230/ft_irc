@@ -33,24 +33,32 @@ int main (int argc, char **argv)
 	try
 	{
 		if (argc != 3)
-			throw std::runtime_error("gooby pls");
+		{
+			throw std::runtime_error("bad arguments");
+		}
+
 		print_file("./assets/logo.txt");
+
 		std::signal(SIGINT, &signal_handler);
 		std::signal(SIGTERM, &signal_handler);
+
 		Server server(argv[2]);
 		SocketManager socket_manager(argv[1], server);
+
 		while (true)
 		{
 			try
 			{
 				socket_manager.loop();
 			}
+
 			catch(const StopServer& e)
 			{
 				server.print_server_status(
 					std::string("\033[1;31m") + e.what());
 				break;
 			}
+
 			catch(const std::runtime_error& e)
 			{
 				server.print_server_status(
@@ -58,10 +66,12 @@ int main (int argc, char **argv)
 			}
 		}
 	}
+
 	catch(const std::exception& e)
 	{
 		std::cerr << "Error: " << e.what() << '\n';
 		return 1;
 	}
+	
 	return 0;
 }

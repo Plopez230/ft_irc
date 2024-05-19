@@ -11,13 +11,10 @@
 /* ************************************************************************** */
 
 #include "irc.hpp"
-#include <stdexcept> //ELIMINAR Y PONER EN EL .HPP
 
 User::User()
 {
 	this->is_registered = false;
-	// this->fd = -1;
-	// ASIGNAR LOS STRINGS COMO CADENAS VACIAS
 }
 
 User::~User()
@@ -42,6 +39,7 @@ const std::string	User::get_username() const
 {
 	return this->username;	
 }
+
 void	User::set_realname(const std::string &realname)
 {
 	this->realname = realname;
@@ -120,28 +118,33 @@ void	User::enqueue_message(const std::string &message)
 const std::string	User::dequeue_message()
 {
 	if (this->output_queue.size() <= 0)
+	{
 		throw std::runtime_error("The message queue is empty!");
+	}
+
 	std::string	message = this->output_queue.front();
 	this->output_queue.pop();
+
 	return message;
 }
 
 bool	User::has_queued_messages() const
 {
-	if (this->output_queue.size() > 0)
-		return true;
-	return false;
+	return this->output_queue.size() > 0;
 }
 
 std::vector<User *>::iterator	find_user_by_nickname(std::vector<User *> &v,
 	const std::string &nickname)
 {
 	std::vector<User *>::iterator	pos = v.begin();
+
 	for (; pos != v.end(); pos++)
 	{
 		if (to_lower((*pos)->get_nickname())
 			== to_lower(nickname))
+		{
 			return pos;
+		}
 	}
-	return pos;
+	return v.end();
 }

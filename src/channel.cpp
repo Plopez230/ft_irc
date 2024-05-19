@@ -18,9 +18,7 @@ Channel::Channel()
 }
 
 Channel::~Channel()
-{
-	
-}
+{}
 
 void Channel::set_pass(const std::string &pass)
 {
@@ -90,17 +88,21 @@ void Channel::add_operator(User *user)
 void Channel::remove_operator(const std::string &nickname)
 {
 	if (this->is_operator(nickname))
+	{
 		this->operators.erase(this->find_operator(nickname));
+	}
 }
 
-std::vector<User *>::iterator Channel::find_operator(const std::string &nickname)
+std::vector<User *>::iterator Channel::find_operator(
+	const std::string &nickname)
 {
 	return find_user_by_nickname(this->operators, nickname);
 }
 
 bool Channel::is_operator(const std::string &nickname)
 {
-	return find_user_by_nickname(this->operators, nickname) != this->operators.end();
+	return find_user_by_nickname(this->operators, nickname)
+		!= this->operators.end();
 }
 
 void Channel::add_user(User *user)
@@ -134,41 +136,57 @@ void Channel::add_invitation(User *user)
 void Channel::remove_invitation(const std::string &nickname)
 {
 	if (this->is_invitation(nickname))
+	{
 		this->invitations.erase(this->find_operator(nickname));
+	}
 }
 
-std::vector<User *>::iterator Channel::find_invitation(const std::string &nickname)
+std::vector<User *>::iterator Channel::find_invitation(
+	const std::string &nickname)
 {
 	return find_user_by_nickname(this->invitations, nickname);
 }
 
 bool Channel::is_invitation(const std::string &nickname)
 {
-	return find_user_by_nickname(this->invitations, nickname) != this->invitations.end();
+	return find_user_by_nickname(this->invitations, nickname)
+		!= this->invitations.end();
 }
 
-std::vector<Channel *>::iterator find_channel_by_topic(std::vector<Channel *> &c, const std::string &topic)
+std::vector<Channel *>::iterator find_channel_by_topic(
+	std::vector<Channel *> &c, const std::string &topic)
 {
 	std::vector<Channel *>::iterator pos = c.begin();
+
 	for (; pos != c.end(); pos++)
 	{
-		if ((*pos)->get_topic() == topic
-			|| (*pos)->get_name() == topic)
+		if ((*pos)->get_topic() == topic || (*pos)->get_name() == topic)
+		{
 			return pos;
+		}
 	}
+
 	return pos;
 }
 
 std::string Channel::get_nicknames()
 {
 	std::string names;
+
 	for (size_t i = 0; i < this->users.size(); i++)
 	{
 		if (i > 0)
+		{
 			names += " ";
+		}
+
 		std::string nickname = this->users[i]->get_nickname();
+
 		if (this->is_operator(nickname))
+		{
 			names += "@";
+		}
+
 		names += nickname;
 	}
 	return names;
@@ -177,7 +195,9 @@ std::string Channel::get_nicknames()
 void Channel::enqueue_message(const std::string &message)
 {
 	for (size_t i = 0; i < this->users.size(); i++)
+	{
 		this->users[i]->enqueue_message(message);
+	}
 }
 
 void Channel::enqueue_message(const std::string &message, User *except)
