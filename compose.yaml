@@ -1,0 +1,17 @@
+
+services:
+  ft_irc:
+    container_name: ft_irc
+    build: ./
+    image: ft_irc
+    volumes: [ source:/ft_irc ]
+    ports:
+      - 6667:12345
+
+volumes:
+  source:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "./"
