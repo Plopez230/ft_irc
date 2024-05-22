@@ -25,10 +25,9 @@ SocketManager::SocketManager(char *port, Server &server):
 	this->hints.ai_protocol = IPPROTO_TCP;
 	this->hints.ai_flags = AI_PASSIVE;
 
-	int gai_return = getaddrinfo("0.0.0.0", port, &this->hints, &this->res);
-	if (gai_return < 0)
+	if (getaddrinfo("0.0.0.0", port, &this->hints, &this->res) < 0)
 	{
-		throw std::runtime_error(gai_strerror(gai_return));
+		throw std::runtime_error("getaddrinfo failed");
 	}
 
 	this->manager_fd = socket(this->res->ai_family, this->res->ai_socktype,
