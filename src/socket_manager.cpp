@@ -14,6 +14,7 @@
 #include <cstring>
 #include <unistd.h>
 #include <fcntl.h>
+#include <errno.h>
 
 SocketManager::SocketManager(char *port, Server &server):
 	port(port),
@@ -25,7 +26,7 @@ SocketManager::SocketManager(char *port, Server &server):
 
 	if (getaddrinfo(NULL, port, &this->hints, &this->res) < 0)
 	{
-		throw std::runtime_error("getaddrinfo failed");
+		throw std::runtime_error(strerror(errno));
 	}
 
 	this->manager_fd = socket(this->res->ai_family, this->res->ai_socktype,
