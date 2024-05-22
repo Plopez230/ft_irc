@@ -22,9 +22,10 @@ SocketManager::SocketManager(char *port, Server &server):
 {
 	this->hints.ai_family = AF_INET;
 	this->hints.ai_socktype = SOCK_STREAM;
+	this->hints.ai_protocol = IPPROTO_TCP;
 	this->hints.ai_flags = AI_PASSIVE;
 
-	int gai_return = getaddrinfo(NULL, port, &this->hints, &this->res);
+	int gai_return = getaddrinfo("0.0.0.0", port, &this->hints, &this->res);
 	if (gai_return < 0)
 	{
 		throw std::runtime_error(gai_strerror(gai_return));
