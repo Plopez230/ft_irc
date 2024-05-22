@@ -24,9 +24,10 @@ SocketManager::SocketManager(char *port, Server &server):
 	this->hints.ai_socktype = SOCK_STREAM;
 	this->hints.ai_flags = AI_PASSIVE;
 
-	if (getaddrinfo(NULL, port, &this->hints, &this->res) < 0)
+	int gai_return = getaddrinfo(NULL, port, &this->hints, &this->res);
+	if (gai_return < 0)
 	{
-		throw std::runtime_error(strerror(errno));
+		throw std::runtime_error(strerror(errno) + " " + gai_strerror(gai_return));
 	}
 
 	this->manager_fd = socket(this->res->ai_family, this->res->ai_socktype,
