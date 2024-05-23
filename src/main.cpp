@@ -28,6 +28,15 @@ static void print_file(const std::string &filename)
 	file.close();
 }
 
+static bool port_is_valid(const std::string &port)
+{
+	int port_number;
+	char remainder;
+
+	return !(sscanf(port.c_str(), "%u%c", &port_number, &remainder) != 1
+		|| port_number < 1024 || port_number > 65535);
+}
+
 int main (int argc, char **argv)
 {
 	try
@@ -35,6 +44,11 @@ int main (int argc, char **argv)
 		if (argc != 3)
 		{
 			throw std::runtime_error("bad arguments");
+		}
+
+		if (!port_is_valid(argv[1]))
+		{
+			throw std::runtime_error("invalid port");
 		}
 
 		print_file("./assets/logo.txt");

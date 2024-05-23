@@ -21,9 +21,10 @@ SocketManager::SocketManager(char *port, Server &server):
 {
 	this->hints.ai_family = AF_INET;
 	this->hints.ai_socktype = SOCK_STREAM;
+	this->hints.ai_protocol = IPPROTO_TCP;
 	this->hints.ai_flags = AI_PASSIVE;
 
-	if (getaddrinfo(NULL, port, &this->hints, &this->res) < 0)
+	if (getaddrinfo("0.0.0.0", port, &this->hints, &this->res) < 0)
 	{
 		throw std::runtime_error("getaddrinfo failed");
 	}
