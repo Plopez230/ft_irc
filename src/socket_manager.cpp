@@ -14,7 +14,6 @@
 #include <cstring>
 #include <unistd.h>
 #include <fcntl.h>
-#include <errno.h>
 
 SocketManager::SocketManager(char *port, Server &server):
 	port(port),
