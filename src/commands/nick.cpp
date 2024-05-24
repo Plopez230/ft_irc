@@ -34,5 +34,14 @@ void nick_command(Command *c, Server *s, User *u)
     }
 
     u->set_nickname(c->argument(1));
-    register_user(s, u);
+
+    if (u->get_is_registered())
+    {
+        u->enqueue_message(command_reply(c, u));
+    }
+
+    else
+    {
+        register_user(s, u);
+    }
 }
