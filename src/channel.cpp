@@ -153,14 +153,14 @@ bool Channel::is_invitation(const std::string &nickname)
 		!= this->invitations.end();
 }
 
-std::vector<Channel *>::iterator find_channel_by_topic(
-	std::vector<Channel *> &c, const std::string &topic)
+std::vector<Channel *>::iterator find_channel_by_name(
+	std::vector<Channel *> &c, const std::string &name)
 {
 	std::vector<Channel *>::iterator pos = c.begin();
 
 	for (; pos != c.end(); pos++)
 	{
-		if ((*pos)->get_topic() == topic || (*pos)->get_name() == topic)
+		if ((*pos)->get_name() == name)
 		{
 			return pos;
 		}

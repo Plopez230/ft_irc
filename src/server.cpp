@@ -128,25 +128,26 @@ void Server::add_channel(Channel *c)
     }
 }
 
-void Server::remove_channel(const std::string &topic)
+void Server::remove_channel(const std::string &channel_name)
 {
-    if (this->is_channel(topic))
+    if (this->is_channel(channel_name))
     {
-        Channel *channel = this->find_channel(topic);
+        Channel *channel = this->find_channel(channel_name);
 
-        this->channels.erase(find_channel_by_topic(this->channels, topic));
+        this->channels.erase(find_channel_by_name(
+            this->channels, channel_name));
         delete channel;
     }
 }
 
-Channel *Server::find_channel(const std::string &topic)
+Channel *Server::find_channel(const std::string &channel_name)
 {
-    return *find_channel_by_topic(this->channels, topic);
+    return *find_channel_by_name(this->channels, channel_name);
 }
 
 bool Server::is_channel(const std::string &topic)
 {
-    return find_channel_by_topic(this->channels, topic) != this->channels.end();
+    return find_channel_by_name(this->channels, topic) != this->channels.end();
 }
 
 void Server::print_server_status(const std::string &last_message) const
