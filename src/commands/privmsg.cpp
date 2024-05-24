@@ -40,13 +40,15 @@ void privmsg_command(Command *c, Server *s, User *u)
         if (s->is_channel(receivers[i]))
         {
             Channel *channel = s->find_channel(receivers[i]);
-            channel->enqueue_message(command_reply(c, u), u);
+            channel->enqueue_message(
+                command_reply(c, u, receivers[i] + " :" + message), u);
         }
 
         else if (s->is_registered(receivers[i]))
         {
             User *user = s->find_registered(receivers[i]);
-            user->enqueue_message(command_reply(c, u));
+            user->enqueue_message(
+                command_reply(c, u, receivers[i] + " :" + message));
         }
 
         else
