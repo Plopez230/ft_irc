@@ -1,0 +1,39 @@
+>6:CAP LS 302
+<6::irc.free_shipping.net 421 * CAP :Unknown command
+>6:PASS 1111
+>6:NICK Pablo
+>6:USER Pablo 0 * :realname
+<6::Pablo!Pablo@0 NICK Pablo
+<6::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<6::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<6::irc.free_shipping.net 003 Pablo :This server was created today :)
+<6::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>6:JOIN #quittest1
+<6::Pablo!Pablo@0 JOIN :#quittest1
+<6::irc.free_shipping.net 331 Pablo #quittest1 :No topic is set
+<6::irc.free_shipping.net 353 Pablo = #quittest1 :@Pablo
+<6::irc.free_shipping.net 366 Pablo #quittest1 :End of NAMES list
+>6:MODE #quittest1
+<6::irc.free_shipping.net 324 Pablo #quittest1 
+>6:WHO #quittest1
+<6::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>5:PASS 1111
+>5:NICK anonymous
+>5:USER a a a a
+<5::anonymous!a@a NICK anonymous
+<5::irc.free_shipping.net 001 anonymous :Welcome to the Internet Relay Network :anonymous!a@a
+<5::irc.free_shipping.net 002 anonymous :Your host is a, running version v1.0
+<5::irc.free_shipping.net 003 anonymous :This server was created today :)
+<5::irc.free_shipping.net 004 anonymous a v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #quittest1
+<5::anonymous!a@a JOIN :#quittest1
+<5::irc.free_shipping.net 332 anonymous #quittest1 :
+<5::irc.free_shipping.net 353 anonymous = #quittest1 :@Pablo anonymous
+<5::irc.free_shipping.net 366 anonymous #quittest1 :End of NAMES list
+<6::anonymous!a@a JOIN :#quittest1
+>5:QUIT :me voy!
+<6::anonymous!a@a QUIT :me voy!
+x5:
+>6:QUIT :Leaving
+x6:
+x5:

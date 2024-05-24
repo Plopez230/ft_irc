@@ -1,0 +1,59 @@
+>5:CAP LS 302
+<5::irc.free_shipping.net 421 * CAP :Unknown command
+>5:PASS 1111
+>5:NICK Pablo
+>5:USER Pablo 0 * :realname
+<5::Pablo!Pablo@0 NICK Pablo
+<5::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<5::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<5::irc.free_shipping.net 003 Pablo :This server was created today :)
+<5::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #nicktest1
+<5::Pablo!Pablo@0 JOIN :#nicktest1
+<5::irc.free_shipping.net 331 Pablo #nicktest1 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #nicktest1 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #nicktest1 :End of NAMES list
+>5:MODE #nicktest1
+<5::irc.free_shipping.net 324 Pablo #nicktest1 
+>5:WHO #nicktest1
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>6:NICK
+<6::irc.free_shipping.net 431 * :No nickname given
+>6:NICK 1asdf
+<6::irc.free_shipping.net 432 * 1asdf :Erroneus nickname
+>6:NICK Pablo
+<6::irc.free_shipping.net 433 * Pablo :Nickname is already in use
+>6:NICK Pablo!
+<6::irc.free_shipping.net 432 * Pablo! :Erroneus nickname
+>6:NICK anonymous
+>6:USER a a a a
+<6::irc.free_shipping.net 464 anonymous :Password incorrect
+x6:
+>6:PASS 1111
+>6:NICK anonymous
+>6:USER a a a a
+<6::anonymous!a@a NICK anonymous
+<6::irc.free_shipping.net 001 anonymous :Welcome to the Internet Relay Network :anonymous!a@a
+<6::irc.free_shipping.net 002 anonymous :Your host is a, running version v1.0
+<6::irc.free_shipping.net 003 anonymous :This server was created today :)
+<6::irc.free_shipping.net 004 anonymous a v1.0 Available user modes: , Available channel modes: iklot
+>6:JOIN #nicktest1
+<6::anonymous!a@a JOIN :#nicktest1
+<6::irc.free_shipping.net 332 anonymous #nicktest1 :
+<6::irc.free_shipping.net 353 anonymous = #nicktest1 :@Pablo anonymous
+<6::irc.free_shipping.net 366 anonymous #nicktest1 :End of NAMES list
+<5::anonymous!a@a JOIN :#nicktest1
+>6:NICK anonYmous
+<6::irc.free_shipping.net 433 anonymous anonYmous :Nickname is already in use
+>6:NICK pablo
+<6::irc.free_shipping.net 433 anonymous pablo :Nickname is already in use
+>6:NICK asdf
+<6::anonymous!a@a NICK asdf
+<5::anonymous!a@a NICK asdf
+>5:QUIT :Leaving
+<6::Pablo!Pablo@0 QUIT :Leaving
+x5:
+>6:NICK Pablo
+<6::asdf!a@a NICK Pablo
+>6:QUIT
+x6:

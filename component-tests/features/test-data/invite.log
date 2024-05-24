@@ -1,0 +1,162 @@
+>5:CAP LS 302
+<5::irc.free_shipping.net 421 * CAP :Unknown command
+>5:PASS 1111
+>5:NICK Pablo
+>5:USER Pablo 0 * :realname
+<5::Pablo!Pablo@0 NICK Pablo
+<5::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<5::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<5::irc.free_shipping.net 003 Pablo :This server was created today :)
+<5::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>6:PASS 1111
+>6:NICK anonymous
+>6:USER a a a a
+<6::anonymous!a@a NICK anonymous
+<6::irc.free_shipping.net 001 anonymous :Welcome to the Internet Relay Network :anonymous!a@a
+<6::irc.free_shipping.net 002 anonymous :Your host is a, running version v1.0
+<6::irc.free_shipping.net 003 anonymous :This server was created today :)
+<6::irc.free_shipping.net 004 anonymous a v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #invitetest1
+<5::Pablo!Pablo@0 JOIN :#invitetest1
+<5::irc.free_shipping.net 331 Pablo #invitetest1 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #invitetest1 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #invitetest1 :End of NAMES list
+>5:MODE #invitetest1
+<5::irc.free_shipping.net 324 Pablo #invitetest1 
+>5:WHO #invitetest1
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>5:JOIN #invitetest2
+<5::Pablo!Pablo@0 JOIN :#invitetest2
+<5::irc.free_shipping.net 331 Pablo #invitetest2 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #invitetest2 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #invitetest2 :End of NAMES list
+>5:MODE #invitetest2
+<5::irc.free_shipping.net 324 Pablo #invitetest2 
+>5:WHO #invitetest2
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>5:MODE #invitetest1 +i
+<5::Pablo!Pablo@0 MODE #invitetest1 +i
+>5:MODE #invitetest2 +i
+<5::Pablo!Pablo@0 MODE #invitetest2 +i
+>5:INVITE anonymous #invitetest1
+<5::irc.free_shipping.net 341 Pablo #invitetest1 anonymous
+<6::Pablo!Pablo@0 INVITE anonymous #invitetest1
+>6:JOIN #invitetest1,#invitetest2
+<6::anonymous!a@a JOIN :#invitetest1
+<6::irc.free_shipping.net 332 anonymous #invitetest1 :
+<6::irc.free_shipping.net 353 anonymous = #invitetest1 :@Pablo anonymous
+<6::irc.free_shipping.net 366 anonymous #invitetest1 :End of NAMES list
+<6::irc.free_shipping.net 473 anonymous #invitetest2 :Cannot join channel (+i)
+<5::anonymous!a@a JOIN :#invitetest1
+>6:PART #invitetest1
+<6::anonymous!a@a PART #invitetest1
+<5::anonymous!a@a PART #invitetest1
+>6:JOIN #invitetest1
+<6::anonymous!a@a JOIN :#invitetest1
+<6::irc.free_shipping.net 332 anonymous #invitetest1 :
+<6::irc.free_shipping.net 353 anonymous = #invitetest1 :@Pablo anonymous
+<6::irc.free_shipping.net 366 anonymous #invitetest1 :End of NAMES list
+<5::anonymous!a@a JOIN :#invitetest1
+>5:JOIN #invitetest3
+<5::Pablo!Pablo@0 JOIN :#invitetest3
+<5::irc.free_shipping.net 331 Pablo #invitetest3 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #invitetest3 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #invitetest3 :End of NAMES list
+>5:MODE #invitetest3
+<5::irc.free_shipping.net 324 Pablo #invitetest3 
+>5:WHO #invitetest3
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>6:JOIN #invitetest3
+<6::anonymous!a@a JOIN :#invitetest3
+<6::irc.free_shipping.net 332 anonymous #invitetest3 :
+<6::irc.free_shipping.net 353 anonymous = #invitetest3 :@Pablo anonymous
+<6::irc.free_shipping.net 366 anonymous #invitetest3 :End of NAMES list
+<5::anonymous!a@a JOIN :#invitetest3
+>5:KICK #invitetest3 anonymous
+<5::Pablo!Pablo@0 KICK #invitetest3 anonymous
+<6::Pablo!Pablo@0 KICK #invitetest3 anonymous
+>5:MODE #invitetest3 +i
+<5::Pablo!Pablo@0 MODE #invitetest3 +i
+>6:JOIN #invitetest3
+<6::irc.free_shipping.net 473 anonymous #invitetest3 :Cannot join channel (+i)
+>5:INVITE anonymous #invitetest3
+<5::irc.free_shipping.net 341 Pablo #invitetest3 anonymous
+<6::Pablo!Pablo@0 INVITE anonymous #invitetest3
+>6:JOIN #invitetest3
+<6::anonymous!a@a JOIN :#invitetest3
+<6::irc.free_shipping.net 332 anonymous #invitetest3 :
+<6::irc.free_shipping.net 353 anonymous = #invitetest3 :@Pablo anonymous
+<6::irc.free_shipping.net 366 anonymous #invitetest3 :End of NAMES list
+<5::anonymous!a@a JOIN :#invitetest3
+>5:KICK #invitetest3 anonymous
+<5::Pablo!Pablo@0 KICK #invitetest3 anonymous
+<6::Pablo!Pablo@0 KICK #invitetest3 anonymous
+>6:JOIN #invitetest3
+<6::irc.free_shipping.net 473 anonymous #invitetest3 :Cannot join channel (+i)
+>6:QUIT
+x6:
+<5::anonymous!a@a QUIT
+>5:QUIT :Leaving
+x5:
+>5:CAP LS 302
+<5::irc.free_shipping.net 421 * CAP :Unknown command
+>5:PASS 1111
+>5:NICK Pablo
+>5:USER Pablo 0 * :realname
+<5::Pablo!Pablo@0 NICK Pablo
+<5::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<5::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<5::irc.free_shipping.net 003 Pablo :This server was created today :)
+<5::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #invitetest4
+<5::Pablo!Pablo@0 JOIN :#invitetest4
+<5::irc.free_shipping.net 331 Pablo #invitetest4 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #invitetest4 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #invitetest4 :End of NAMES list
+>5:MODE #invitetest4
+<5::irc.free_shipping.net 324 Pablo #invitetest4 
+>5:WHO #invitetest4
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>6:PASS 1111
+>6:NICK anonymous
+>6:USER a a a a
+<6::anonymous!a@a NICK anonymous
+<6::irc.free_shipping.net 001 anonymous :Welcome to the Internet Relay Network :anonymous!a@a
+<6::irc.free_shipping.net 002 anonymous :Your host is a, running version v1.0
+<6::irc.free_shipping.net 003 anonymous :This server was created today :)
+<6::irc.free_shipping.net 004 anonymous a v1.0 Available user modes: , Available channel modes: iklot
+>5:MODE #invitetest4 +i
+<5::Pablo!Pablo@0 MODE #invitetest4 +i
+>5:INVITE nonuser #invitetest4
+<5::irc.free_shipping.net 401 Pablo nonuser :No such nick/channel
+>5:INVITE anonymouS #invitetest4
+<5::irc.free_shipping.net 341 Pablo #invitetest4 anonymous
+<6::Pablo!Pablo@0 INVITE anonymouS #invitetest4
+>6:JOIN #invitetest3
+<6::irc.free_shipping.net 473 anonymous #invitetest3 :Cannot join channel (+i)
+>6:JOIN #invitetest4
+<6::anonymous!a@a JOIN :#invitetest4
+<6::irc.free_shipping.net 332 anonymous #invitetest4 :
+<6::irc.free_shipping.net 353 anonymous = #invitetest4 :@Pablo anonymous
+<6::irc.free_shipping.net 366 anonymous #invitetest4 :End of NAMES list
+<5::anonymous!a@a JOIN :#invitetest4
+>6:INVITE #invitetest4 nonuser
+<6::irc.free_shipping.net 403 anonymous nonuser :No such channel
+>6:INVITE #invitetest4 Pablo
+<6::irc.free_shipping.net 403 anonymous Pablo :No such channel
+>6:INVITE nonuser #invitetest4
+<6::irc.free_shipping.net 482 anonymous #invitetest4 :You're not channel operator
+>6:INVITE Pablo #invitetest4
+<6::irc.free_shipping.net 482 anonymous #invitetest4 :You're not channel operator
+>5:WHOIS anonymous anonymous
+<5::irc.free_shipping.net 421 Pablo WHOIS :Unknown command
+>5:MODE #invitetest4 +o anonymous
+<5::Pablo!Pablo@0 MODE #invitetest4 +o anonymous
+<6::Pablo!Pablo@0 MODE #invitetest4 +o anonymous
+>6:INVITE Pablo #invitetest4
+<6::irc.free_shipping.net 443 anonymous #invitetest4 Pablo :is already on channel
+>6:QUIT
+x6:
+<5::anonymous!a@a QUIT
+>5:QUIT :Leaving
+x5:
