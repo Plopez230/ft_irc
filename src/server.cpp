@@ -122,7 +122,7 @@ bool Server::is_registered(const std::string &nickname)
 
 void Server::add_channel(Channel *c)
 {
-    if (c && !this->is_channel(c->get_topic()))
+    if (c && !this->is_channel(c->get_name()))
     {
         this->channels.push_back(c);
     }
