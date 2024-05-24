@@ -30,6 +30,12 @@ void kick_command(Command *c, Server *s, User *u)
 
     Channel *channel = s->find_channel(channel_name);
 
+    if (!channel->is_user(u->get_nickname()))
+    {
+        u->enqueue_message(err_notonchannel(s, u, channel_name));
+        return;
+    }
+
     if (!channel->is_operator(u->get_nickname()))
     {
         u->enqueue_message(err_chanoprivsneeded(s, channel, u));
