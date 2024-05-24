@@ -117,7 +117,7 @@ public:
     void enqueue_message(const std::string &message, User *except);
 };
 
-std::vector<Channel *>::iterator find_channel_by_topic(
+std::vector<Channel *>::iterator find_channel_by_name(
     std::vector<Channel *> &c, const std::string &topic);
 
 // ./src/server.cpp
