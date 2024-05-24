@@ -42,6 +42,7 @@ void topic_command(Command *c, Server *s, User *u)
             && !channel->is_operator(u->get_nickname()))
         {
             u->enqueue_message(err_chanoprivsneeded(s, channel, u));
+            u->enqueue_message(rpl_topic(s, channel, u));
             return;
         }
 
