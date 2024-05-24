@@ -190,7 +190,7 @@ void Server::enqueue_message_in_user_channels(
 
         if (channel->is_user(user->get_nickname()))
         {
-            channel->enqueue_message(msg);
+            channel->enqueue_message(msg, user);
         }
     }
 }
