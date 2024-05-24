@@ -1,0 +1,47 @@
+>5:CAP LS 302
+>5:PASS 1111
+>5:NICK Pablo
+>5:USER Pablo 0 * :realname
+<5::irc.free_shipping.net 421 * CAP :Unknown command
+<5::Pablo!Pablo@0 NICK Pablo
+<5::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<5::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<5::irc.free_shipping.net 003 Pablo :This server was created today :)
+<5::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #parttest1
+<5::Pablo!Pablo@0 JOIN :#parttest1
+<5::irc.free_shipping.net 331 Pablo #parttest1 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #parttest1 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #parttest1 :End of NAMES list
+>5:MODE #parttest1
+<5::irc.free_shipping.net 324 Pablo #parttest1 
+>5:WHO #parttest1
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>6:PASS 1111
+>6:NICK anonymous
+>6:USER a a a a
+<6::anonymous!a@a NICK anonymous
+<6::irc.free_shipping.net 001 anonymous :Welcome to the Internet Relay Network :anonymous!a@a
+<6::irc.free_shipping.net 002 anonymous :Your host is a, running version v1.0
+<6::irc.free_shipping.net 003 anonymous :This server was created today :)
+<6::irc.free_shipping.net 004 anonymous a v1.0 Available user modes: , Available channel modes: iklot
+>6:PART
+<6::irc.free_shipping.net 461 anonymous PART :Not enough parameters
+>6:PART #parttest1
+<6::irc.free_shipping.net 442 anonymous #parttest1 :You're not on that channel
+>6:PART #parttest2
+<6::irc.free_shipping.net 403 anonymous #parttest2 :No such channel
+>6:JOIN #parttest1
+<6::anonymous!a@a JOIN :#parttest1
+<6::irc.free_shipping.net 332 anonymous #parttest1 :
+<6::irc.free_shipping.net 353 anonymous = #parttest1 :@Pablo anonymous
+<6::irc.free_shipping.net 366 anonymous #parttest1 :End of NAMES list
+<5::anonymous!a@a JOIN :#parttest1
+>6:PART #parttest2,#parttest1
+<6::irc.free_shipping.net 403 anonymous #parttest2 :No such channel
+<6::anonymous!a@a PART #parttest1
+<5::anonymous!a@a PART #parttest1
+>6:QUIT
+x6:
+>5:QUIT :Leaving
+x5:

@@ -1,0 +1,89 @@
+>5:CAP LS 302
+<5::irc.free_shipping.net 421 * CAP :Unknown command
+>5:PASS 1111
+>5:NICK Pablo
+>5:USER Pablo 0 * :realname
+<5::Pablo!Pablo@0 NICK Pablo
+<5::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<5::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<5::irc.free_shipping.net 003 Pablo :This server was created today :)
+<5::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #topictest1
+<5::Pablo!Pablo@0 JOIN :#topictest1
+<5::irc.free_shipping.net 331 Pablo #topictest1 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #topictest1 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #topictest1 :End of NAMES list
+>5:MODE #topictest1
+<5::irc.free_shipping.net 324 Pablo #topictest1 
+>5:WHO #topictest1
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>6:PASS 1111
+>6:NICK plopez
+>6:USER a a a a
+<6::plopez!a@a NICK plopez
+<6::irc.free_shipping.net 001 plopez :Welcome to the Internet Relay Network :plopez!a@a
+<6::irc.free_shipping.net 002 plopez :Your host is a, running version v1.0
+<6::irc.free_shipping.net 003 plopez :This server was created today :)
+<6::irc.free_shipping.net 004 plopez a v1.0 Available user modes: , Available channel modes: iklot
+>6:JOIN #topictest1
+<6::plopez!a@a JOIN :#topictest1
+<6::irc.free_shipping.net 332 plopez #topictest1 :
+<6::irc.free_shipping.net 353 plopez = #topictest1 :@Pablo plopez
+<6::irc.free_shipping.net 366 plopez #topictest1 :End of NAMES list
+<5::plopez!a@a JOIN :#topictest1
+>5:TOPIC #topictest1 :I can change the topic
+<5::Pablo!Pablo@0 TOPIC #topictest1 :I can change the topic
+<5::irc.free_shipping.net 332 Pablo #topictest1 :I can change the topic
+<6::Pablo!Pablo@0 TOPIC #topictest1 :I can change the topic
+<6::irc.free_shipping.net 332 Pablo #topictest1 :I can change the topic
+>6:TOPIC #topictest1
+<6::irc.free_shipping.net 332 plopez #topictest1 :I can change the topic
+<5::irc.free_shipping.net 332 plopez #topictest1 :I can change the topic
+>6:TOPIC
+<6::irc.free_shipping.net 461 plopez TOPIC :Not enough parameters
+>5:JOIN #topictest2
+<5::Pablo!Pablo@0 JOIN :#topictest2
+<5::irc.free_shipping.net 331 Pablo #topictest2 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #topictest2 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #topictest2 :End of NAMES list
+>5:MODE #topictest2
+<5::irc.free_shipping.net 324 Pablo #topictest2 
+>5:WHO #topictest2
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>6:TOPIC #topictest2
+<6::irc.free_shipping.net 442 plopez #topictest2 :You're not on that channel
+>6:TOPIC #topictest3
+<6::irc.free_shipping.net 403 plopez #topictest3 :No such channel
+>6:TOPIC #topictest1 :This is the new topic
+<6::plopez!a@a TOPIC #topictest1 :This is the new topic
+<6::irc.free_shipping.net 332 plopez #topictest1 :This is the new topic
+<5::plopez!a@a TOPIC #topictest1 :This is the new topic
+<5::irc.free_shipping.net 332 plopez #topictest1 :This is the new topic
+>5:MODE #topictest2 +t
+<5::Pablo!Pablo@0 MODE #topictest2 +t
+>5:TOPIC #topictest2 :I can change the topic
+<5::Pablo!Pablo@0 TOPIC #topictest2 :I can change the topic
+<5::irc.free_shipping.net 332 Pablo #topictest2 :I can change the topic
+>6:JOIN #topictest2
+<6::plopez!a@a JOIN :#topictest2
+<6::irc.free_shipping.net 332 plopez #topictest2 :I can change the topic
+<6::irc.free_shipping.net 353 plopez = #topictest2 :@Pablo plopez
+<6::irc.free_shipping.net 366 plopez #topictest2 :End of NAMES list
+<5::plopez!a@a JOIN :#topictest2
+>6:TOPIC #topictest2 :Can I change the topic?
+<6::irc.free_shipping.net 482 plopez #topictest2 :You're not channel operator
+<6::irc.free_shipping.net 332 plopez #topictest2 :I can change the topic
+>5:MODE #topictest2 +o plopez
+<5::Pablo!Pablo@0 MODE #topictest2 +o plopez
+<6::Pablo!Pablo@0 MODE #topictest2 +o plopez
+>6:TOPIC #topictest2 :Now I can change the topic
+<6::plopez!a@a TOPIC #topictest2 :Now I can change the topic
+<6::irc.free_shipping.net 332 plopez #topictest2 :Now I can change the topic
+<5::plopez!a@a TOPIC #topictest2 :Now I can change the topic
+<5::irc.free_shipping.net 332 plopez #topictest2 :Now I can change the topic
+>5:QUIT :Leaving
+<6::Pablo!Pablo@0 QUIT :Leaving
+<6::Pablo!Pablo@0 QUIT :Leaving
+x5:
+>6:QUIT
+x6:

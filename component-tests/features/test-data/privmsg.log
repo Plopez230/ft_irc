@@ -1,0 +1,145 @@
+>5:CAP LS 302
+<5::irc.free_shipping.net 421 * CAP :Unknown command
+>5:PASS 1111
+>5:NICK Pablo
+>5:USER Pablo 0 * :realname
+<5::Pablo!Pablo@0 NICK Pablo
+<5::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<5::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<5::irc.free_shipping.net 003 Pablo :This server was created today :)
+<5::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>6:PASS 1111
+>6:NICK anonym1
+>6:USER a a a a
+<6::anonym1!a@a NICK anonym1
+<6::irc.free_shipping.net 001 anonym1 :Welcome to the Internet Relay Network :anonym1!a@a
+<6::irc.free_shipping.net 002 anonym1 :Your host is a, running version v1.0
+<6::irc.free_shipping.net 003 anonym1 :This server was created today :)
+<6::irc.free_shipping.net 004 anonym1 a v1.0 Available user modes: , Available channel modes: iklot
+>7:NICK anonym2
+>7:PASS 1111
+>7:USER b b b b
+<7::anonym2!b@b NICK anonym2
+<7::irc.free_shipping.net 001 anonym2 :Welcome to the Internet Relay Network :anonym2!b@b
+<7::irc.free_shipping.net 002 anonym2 :Your host is b, running version v1.0
+<7::irc.free_shipping.net 003 anonym2 :This server was created today :)
+<7::irc.free_shipping.net 004 anonym2 b v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #privmsgtest1
+<5::Pablo!Pablo@0 JOIN :#privmsgtest1
+<5::irc.free_shipping.net 331 Pablo #privmsgtest1 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #privmsgtest1 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #privmsgtest1 :End of NAMES list
+>5:MODE #privmsgtest1
+<5::irc.free_shipping.net 324 Pablo #privmsgtest1 
+>5:WHO #privmsgtest1
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>5:JOIN #privmsgtest2
+<5::Pablo!Pablo@0 JOIN :#privmsgtest2
+<5::irc.free_shipping.net 331 Pablo #privmsgtest2 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #privmsgtest2 :@Pablo
+<5::irc.free_shipping.net 366 Pablo #privmsgtest2 :End of NAMES list
+>5:MODE #privmsgtest2
+<5::irc.free_shipping.net 324 Pablo #privmsgtest2 
+>5:WHO #privmsgtest2
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>7:JOIN #privmsg2,#privmsg3
+<7::anonym2!b@b JOIN :#privmsg2
+<7::irc.free_shipping.net 331 anonym2 #privmsg2 :No topic is set
+<7::irc.free_shipping.net 353 anonym2 = #privmsg2 :@anonym2
+<7::irc.free_shipping.net 366 anonym2 #privmsg2 :End of NAMES list
+<7::anonym2!b@b JOIN :#privmsg3
+<7::irc.free_shipping.net 331 anonym2 #privmsg3 :No topic is set
+<7::irc.free_shipping.net 353 anonym2 = #privmsg3 :@anonym2
+<7::irc.free_shipping.net 366 anonym2 #privmsg3 :End of NAMES list
+>7:JOIN #privmsgtest2,#privmsgtest3
+<7::anonym2!b@b JOIN :#privmsgtest2
+<7::irc.free_shipping.net 332 anonym2 #privmsgtest2 :
+<7::irc.free_shipping.net 353 anonym2 = #privmsgtest2 :@Pablo anonym2
+<7::irc.free_shipping.net 366 anonym2 #privmsgtest2 :End of NAMES list
+<7::anonym2!b@b JOIN :#privmsgtest3
+<7::irc.free_shipping.net 331 anonym2 #privmsgtest3 :No topic is set
+<7::irc.free_shipping.net 353 anonym2 = #privmsgtest3 :@anonym2
+<7::irc.free_shipping.net 366 anonym2 #privmsgtest3 :End of NAMES list
+<5::anonym2!b@b JOIN :#privmsgtest2
+>6:JOIN #privmsgtest3,#privmsgtest1
+<6::anonym1!a@a JOIN :#privmsgtest3
+<6::irc.free_shipping.net 332 anonym1 #privmsgtest3 :
+<6::irc.free_shipping.net 353 anonym1 = #privmsgtest3 :@anonym2 anonym1
+<6::irc.free_shipping.net 366 anonym1 #privmsgtest3 :End of NAMES list
+<6::anonym1!a@a JOIN :#privmsgtest1
+<6::irc.free_shipping.net 332 anonym1 #privmsgtest1 :
+<6::irc.free_shipping.net 353 anonym1 = #privmsgtest1 :@Pablo anonym1
+<6::irc.free_shipping.net 366 anonym1 #privmsgtest1 :End of NAMES list
+<7::anonym1!a@a JOIN :#privmsgtest3
+<5::anonym1!a@a JOIN :#privmsgtest1
+>5:PRIVMSG #privmsgtest1 :This message is only for anonym1
+<6::Pablo!Pablo@0 PRIVMSG #privmsgtest1 :This message is only for anonym1
+>5:PRIVMSG #privmsgtest2 :This message is only for anonym2
+<7::Pablo!Pablo@0 PRIVMSG #privmsgtest2 :This message is only for anonym2
+>7:PRIVMSG #privmsgtest2 :This message is only for Pablo
+<5::anonym2!b@b PRIVMSG #privmsgtest2 :This message is only for Pablo
+>6:PRIVMSG #privmsgtest1 :This message is only for Pablo
+<5::anonym1!a@a PRIVMSG #privmsgtest1 :This message is only for Pablo
+>6:JOIN #privmsg2
+<6::anonym1!a@a JOIN :#privmsg2
+<6::irc.free_shipping.net 332 anonym1 #privmsg2 :
+<6::irc.free_shipping.net 353 anonym1 = #privmsg2 :@anonym2 anonym1
+<6::irc.free_shipping.net 366 anonym1 #privmsg2 :End of NAMES list
+<7::anonym1!a@a JOIN :#privmsg2
+>7:PRIVMSG #privmsg3 :This message is for nobody
+>5:JOIN #privmsg2
+<5::Pablo!Pablo@0 JOIN :#privmsg2
+<5::irc.free_shipping.net 332 Pablo #privmsg2 :
+<5::irc.free_shipping.net 353 Pablo = #privmsg2 :@anonym2 anonym1 Pablo
+<5::irc.free_shipping.net 366 Pablo #privmsg2 :End of NAMES list
+<6::Pablo!Pablo@0 JOIN :#privmsg2
+<7::Pablo!Pablo@0 JOIN :#privmsg2
+>5:MODE #privmsg2
+<5::irc.free_shipping.net 324 Pablo #privmsg2 
+>5:WHO #privmsg2
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>5:PRIVMSG #privmsg2 :This message is for everyone
+<6::Pablo!Pablo@0 PRIVMSG #privmsg2 :This message is for everyone
+<7::Pablo!Pablo@0 PRIVMSG #privmsg2 :This message is for everyone
+>7:PRIVMSG
+<7::irc.free_shipping.net 461 anonym2 PRIVMSG :Not enough parameters
+>7:PRIVMSG #privmsg2
+<7::irc.free_shipping.net 461 anonym2 PRIVMSG :Not enough parameters
+>7:PRIVMSG #privmsg2 :Hello!
+<5::anonym2!b@b PRIVMSG #privmsg2 :Hello!
+<6::anonym2!b@b PRIVMSG #privmsg2 :Hello!
+>6:PRIVMSG anonym1 :This message is only for you
+<6::anonym1!a@a PRIVMSG anonym1 :This message is only for you
+>6:PRIVMSG anonym2 :How are you?
+<7::anonym1!a@a PRIVMSG anonym2 :How are you?
+>7:PRIVMSG nonuser :Can you read this?
+<7::irc.free_shipping.net 401 anonym2 nonuser :No such nick/channel
+>7:PRIVMSG #privmsg1 :Hello?
+<7::irc.free_shipping.net 401 anonym2 #privmsg1 :No such nick/channel
+>7:PRIVMSG Pablo :Hello!
+<5::anonym2!b@b PRIVMSG Pablo :Hello!
+>7:PART #privmsg2
+<7::anonym2!b@b PART #privmsg2
+<5::anonym2!b@b PART #privmsg2
+<6::anonym2!b@b PART #privmsg2
+>5:PRIVMSG #privmsg2 :hello!
+<6::Pablo!Pablo@0 PRIVMSG #privmsg2 :hello!
+>6:PRIVMSG #privmsg2 :It works!
+<5::anonym1!a@a PRIVMSG #privmsg2 :It works!
+>6:PRIVMSG #privmsgtest2,anonym1 :Can you read this?
+<6::anonym1!a@a PRIVMSG anonym1 :Can you read this?
+<7::anonym1!a@a PRIVMSG #privmsgtest2 :Can you read this?
+<5::anonym1!a@a PRIVMSG #privmsgtest2 :Can you read this?
+>7:PRIVMSG Pablo,anonym1 :Hello!
+<5::anonym2!b@b PRIVMSG Pablo :Hello!
+<6::anonym2!b@b PRIVMSG anonym1 :Hello!
+>6:QUIT
+<7::anonym1!a@a QUIT
+x6:
+<5::anonym1!a@a QUIT
+<5::anonym1!a@a QUIT
+>5:QUIT :Leaving
+<7::Pablo!Pablo@0 QUIT :Leaving
+x5:
+>7:QUIT
+x7:

@@ -1,0 +1,24 @@
+>5:PASS 1111
+>5:NICK anonymous
+>5:USER
+<5::irc.free_shipping.net 461 anonymous USER :Not enough parameters
+>5:USER a
+<5::irc.free_shipping.net 461 anonymous USER :Not enough parameters
+>5:USER a a 
+<5::irc.free_shipping.net 461 anonymous USER :Not enough parameters
+>5:USER a a a
+<5::irc.free_shipping.net 461 anonymous USER :Not enough parameters
+>5:USER a :a :a
+<5::irc.free_shipping.net 461 anonymous USER :Not enough parameters
+>5:USER a :a a a
+<5::irc.free_shipping.net 461 anonymous USER :Not enough parameters
+>5:USER a :a :a a
+<5::irc.free_shipping.net 461 anonymous USER :Not enough parameters
+>5:USER a a a :a
+<5::anonymous!a@a NICK anonymous
+<5::irc.free_shipping.net 001 anonymous :Welcome to the Internet Relay Network :anonymous!a@a
+<5::irc.free_shipping.net 002 anonymous :Your host is a, running version v1.0
+<5::irc.free_shipping.net 003 anonymous :This server was created today :)
+<5::irc.free_shipping.net 004 anonymous a v1.0 Available user modes: , Available channel modes: iklot
+>5:QUIT
+x5:
