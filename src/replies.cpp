@@ -215,3 +215,8 @@ std::string rpl_notopic(Server *s, Channel *c, User *u)
 {
     return err_prefix(s, u, "331") + c->get_name() + " :No topic is set";
 }
+
+std::string err_umodeunknownflag(Server *s, User *u)
+{
+    return err_prefix(s, u, "501") + ":Unknown MODE flag";
+}

@@ -132,7 +132,7 @@ static void mode_command_modify_l(Command *c, Server *s, Channel *channel,
 
         if (!sscanf(argument.c_str(), " %lu", &channel_limit))
         {
-            u->enqueue_message(err_unknownmode(s, u, 'l'));
+            u->enqueue_message(err_umodeunknownflag(s, u));
             return;
         }
 
@@ -222,13 +222,21 @@ static void mode_command_modify(Command *c, Server *s, Channel *channel,
         else if (mode_string[pos] == 'k')
         {
             mode_command_modify_k(c, s, channel, u, flag_sign, argument_pos);
-            argument_pos++;
+
+            if (flag_sign)
+            {
+                argument_pos++;
+            }
         }
 
         else if (mode_string[pos] == 'l')
         {
             mode_command_modify_l(c, s, channel, u, flag_sign, argument_pos);
-            argument_pos++;
+
+            if (flag_sign)
+            {
+                argument_pos++;
+            }
         }
 
         else if (mode_string[pos] == 'o')
