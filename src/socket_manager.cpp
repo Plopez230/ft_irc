@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   socket_manager.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plopez-b <plopez-b@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: plopez-b <plopez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:29:31 by plopez-b          #+#    #+#             */
-/*   Updated: 2024/05/17 18:29:31 by plopez-b         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:36:31 by plopez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void SocketManager::send_messages(pollfd pfd, std::vector<pollfd> &to_close)
 		return;
 	}
 
-	while (user->has_queued_messages())
+	if (user->has_queued_messages())
 	{
 		std::string message = user->dequeue_message();
 		
@@ -236,10 +236,9 @@ void SocketManager::send_messages(pollfd pfd, std::vector<pollfd> &to_close)
 		
 		message += "\n";
 
-		if (send(pfd.fd, message.c_str(), message.size(), 0) < 0)
+		if (send(pfd.fd, message.c_str(), message.size(), MSG_NOSIGNAL) < 0)
 		{
 			to_close.push_back(pfd);
-			break;
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plopez-b <plopez-b@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: plopez-b <plopez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:06:45 by plopez-b          #+#    #+#             */
-/*   Updated: 2024/05/18 15:06:45 by plopez-b         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:23:59 by plopez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,27 @@
 
 bool is_valid_channel_name(const std::string &channel_name)
 {
-    return channel_name.length() > 2 && channel_name[0] == '#';
+    if (channel_name.length() < 2 || channel_name.length() > 100)
+    {
+        return false;
+    }
+    
+    if (!(channel_name[0] == '#' || channel_name[0] == '&'))
+    {
+        return false;
+    }
+    
+    for (size_t i = 1; i < channel_name.size(); i++)
+    {
+        char c = channel_name[i];
+        if (c == ' ' || c == '\a' || c == '\0' || c == '\n' || c == '\r' 
+            || c == ',')
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool is_valid_nickname(const std::string &nickname)
