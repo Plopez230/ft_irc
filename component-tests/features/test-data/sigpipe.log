@@ -1,0 +1,5 @@
+>6:PASS 1111
+>6:NICK anonymous
+>6:USER a a a a
+>6:JOIN #a,#b,#c,#d,#e,#f,#g,#h,#i,#j,#k,#l,#m,#n,#o,#p,#q,#r,#s,#t,#u,#v,#w
+x6:

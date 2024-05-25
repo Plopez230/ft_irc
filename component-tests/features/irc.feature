@@ -18,3 +18,4 @@ Feature: IRC
     | privmsg.log                                                           |
     | mode.log                                                              |
     | quit.log                                                              |
+    | sigpipe.log                                                           |
