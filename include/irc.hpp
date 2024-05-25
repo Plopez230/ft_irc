@@ -209,14 +209,14 @@ private:
     SocketManager();
     SocketManager(const SocketManager &s);
     SocketManager &operator=(const SocketManager &s);
-public:
-    SocketManager(char *port, Server &server);
-    ~SocketManager();
-    void loop();
     void new_connection(pollfd pfd);
     void end_connection(pollfd pfd);
     void receive_message(pollfd pfd, std::vector<pollfd> &to_close);
     void send_messages(pollfd pfd, std::vector<pollfd> &to_close);
+public:
+    SocketManager(char *port, Server &server);
+    ~SocketManager();
+    void loop();
 };
 
 class CloseConnection: public std::runtime_error
@@ -318,5 +318,6 @@ std::string err_norecipient(Command *c, Server *s, User *u);
 std::string rpl_inviting(Server *s, Channel *c, User *u, User *user);
 std::string err_useronchannel(Server *s, Channel *c, User *u, User *user);
 std::string rpl_notopic(Server *s, Channel *c, User *u);
+std::string err_umodeunknownflag(Server *s, User *u);
 
 #endif
