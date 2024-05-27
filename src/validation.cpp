@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plopez-b <plopez-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:06:45 by plopez-b          #+#    #+#             */
-/*   Updated: 2024/05/25 18:23:59 by plopez-b         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:19:48 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool is_valid_channel_name(const std::string &channel_name)
 {
-    if (channel_name.length() < 2 || channel_name.length() > 100)
+    if (channel_name.length() < 2 || channel_name.length() > 32)
     {
         return false;
     }
