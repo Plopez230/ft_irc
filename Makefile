@@ -6,7 +6,7 @@
 #    By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 11:54:06 by jariza-o          #+#    #+#              #
-#    Updated: 2024/05/15 13:45:37 by jariza-o         ###   ########.fr        #
+#    Updated: 2024/05/27 11:47:34 by jariza-o         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,11 @@ NAME	=	ircserv
 
 all:	$(NAME)
 $(NAME): ${OBJ}
-	@g++ ${CFLAGS} ${OBJ} -o ${NAME}
+	@clang++ ${CFLAGS} ${OBJ} -o ${NAME}
 
 obj/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	@g++ ${CFLAGS} -c $< -o $@
+	@clang++ ${CFLAGS} -c $< -o $@
 
 clean:
 	@rm -rf ${OBJ} obj/
