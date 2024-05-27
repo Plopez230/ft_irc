@@ -85,42 +85,40 @@ void SocketManager::loop()
 		throw std::runtime_error("poll failed");
 	}
 
-	for (std::vector<pollfd>::iterator i = this->pollfds.begin();
-		i < this->pollfds.end(); i++)
+	for (size_t pos = 0; pos < this->pollfds.size(); pos++)
 	{
-		if (i->revents == 0)
+		if (this->pollfds[pos].revents == 0)
 		{
 			continue;
 		}
 
-		if (i->revents & (POLLHUP | POLLERR | POLLNVAL))
+		if (this->pollfds[pos].revents & (POLLHUP | POLLERR | POLLNVAL))
 		{
-			to_close.push_back(*i);
+			to_close.push_back(this->pollfds[pos]);
 		}
 
-		else if (i->fd == this->manager_fd)
+		else if (this->pollfds[pos].fd == this->manager_fd)
 		{
-			new_connection(*i);
+			new_connection(this->pollfds[pos]);
 		}
 
 		else
 		{
-			if (i->revents & POLLIN)
+			if (this->pollfds[pos].revents & POLLIN)
 			{
-				this->receive_message(*i, to_close);
+				this->receive_message(this->pollfds[pos], to_close);
 			}
 
-			if (i->revents & POLLOUT)
+			if (this->pollfds[pos].revents & POLLOUT)
 			{
-				this->send_messages(*i, to_close);
+				this->send_messages(this->pollfds[pos], to_close);
 			}
 		}
 	}
 
-	for (std::vector<pollfd>::iterator i = to_close.begin();
-		i < to_close.end(); i++)
+	for (size_t pos = 0; pos < to_close.size(); pos++)
 	{
-		this->end_connection(*i);
+		this->end_connection(to_close[pos]);
 	}
 }
 
