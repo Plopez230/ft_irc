@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plopez-b <plopez-b@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:20:20 by plopez-b          #+#    #+#             */
-/*   Updated: 2024/05/14 20:20:20 by plopez-b         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:48:01 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ std::vector<std::string> split(
 
 Command::Command(const std::string &message)
 {
-    this->message = message;
+    this->message = message.substr(0,510);
     std::vector<std::string> s, c;
     c = split(message, ':', true);
 
