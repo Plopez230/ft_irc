@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:35:18 by jariza-o          #+#    #+#             */
-/*   Updated: 2024/05/28 10:54:25 by jariza-o         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:47:46 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ private:
 	Bot(const Bot& src);
 	Bot& 						operator=(const Bot& src);
 	int							sock;
+	int							addrinf;
 	std::string					ipAddress, port, pass;
 	addrinfo					h;
 	addrinfo*					r;

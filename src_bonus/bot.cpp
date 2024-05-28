@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:10:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2024/05/28 11:09:57 by jariza-o         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:53:23 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ Bot::Bot(const char* ipAddress, const char* port, const char* pass)
 	this->h.ai_protocol = IPPROTO_TCP;
 	this->h.ai_flags = AI_PASSIVE;
 
-	if (getaddrinfo(this->ipAddress.c_str(), this->port.c_str(), &this->h, &this->r) < 0)
+	this->addrinf = getaddrinfo(this->ipAddress.c_str(), this->port.c_str(), &this->h, &this->r);
+	if (this->addrinf < 0)
 	{
 		throw std::runtime_error("getaddrinfo failed");
 	}
@@ -33,13 +34,16 @@ Bot::Bot(const char* ipAddress, const char* port, const char* pass)
 	{
 		throw std::runtime_error("socket failed");
 	}
+	freeaddrinfo(this->r);
 	if (connect(this->sock, this->r->ai_addr, this->r->ai_addrlen) == -1)
 	{
 		throw std::runtime_error("connection failed");
 	}
 	this->send("PASS " + this->pass);
 }
-Bot::~Bot(){}
+Bot::~Bot()
+{
+}
 
 void	Bot::send(const std::string& message)
 {
@@ -100,7 +104,7 @@ std::vector<std::string> split(
 std::string	Bot::get_randomPhrase() const
 {
 	srand(time(NULL));
-	int i = rand() % 5;
+	int i = rand() % 6;
 	switch (i)
 	{
 		case 0:
@@ -112,7 +116,9 @@ std::string	Bot::get_randomPhrase() const
 		case 3:
 			return "Ni ChatGPT seria capaz de responder esto";
 		case 4:
-			return "Tagarninas con heuvos";
+			return "Tagarninas con huevos";
+		case 5:
+			return "Sou un cupcake y QUEEEEEEEEEEEEEEEEEEEEE!!!!!!!";
 	}
 	
 	return "jAJJAJAJAJAJJAjA";
