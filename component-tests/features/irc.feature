@@ -21,3 +21,4 @@ Feature: IRC
     | sigpipe.log                                                           |
     | not_registered.log                                                    |
     | not_enough_params.log                                                 |
+    | many_targets.log                                                      |
