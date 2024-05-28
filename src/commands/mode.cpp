@@ -254,6 +254,12 @@ static void mode_command_modify(Command *c, Server *s, Channel *channel,
 
 void mode_command(Command *c, Server *s, User *u)
 {
+    if (!u->get_is_registered())
+    {
+        u->enqueue_message(err_notregistered(s, u));
+        return;
+    }
+    
     if (c->size() < 2)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));

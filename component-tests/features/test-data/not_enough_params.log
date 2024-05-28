@@ -1,0 +1,40 @@
+>6:CAP LS 302
+>6:PASS 1111
+>6:NICK Pablo
+>6:USER Pablo 0 * :realname
+<6::irc.free_shipping.net 421 * CAP :Unknown command
+<6::Pablo!Pablo@0 NICK Pablo
+<6::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<6::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<6::irc.free_shipping.net 003 Pablo :This server was created today :)
+<6::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>5:NICK plopez-b
+>5:PASS 1111
+>5:USER a a a a
+<5::plopez-b!a@a NICK plopez-b
+<5::irc.free_shipping.net 001 plopez-b :Welcome to the Internet Relay Network :plopez-b!a@a
+<5::irc.free_shipping.net 002 plopez-b :Your host is a, running version v1.0
+<5::irc.free_shipping.net 003 plopez-b :This server was created today :)
+<5::irc.free_shipping.net 004 plopez-b a v1.0 Available user modes: , Available channel modes: iklot
+>5:NICK
+<5::irc.free_shipping.net 431 plopez-b :No nickname given
+>5:INVITE
+<5::irc.free_shipping.net 461 plopez-b INVITE :Not enough parameters
+>5:MODE
+<5::irc.free_shipping.net 461 plopez-b MODE :Not enough parameters
+>5:PART
+<5::irc.free_shipping.net 461 plopez-b PART :Not enough parameters
+>5:PASS
+<5::irc.free_shipping.net 461 plopez-b PASS :Not enough parameters
+>5:PRIVMSG
+<5::irc.free_shipping.net 461 plopez-b PRIVMSG :Not enough parameters
+>5:JOIN
+<5::irc.free_shipping.net 461 plopez-b JOIN :Not enough parameters
+>5:KICK
+<5::irc.free_shipping.net 461 plopez-b KICK :Not enough parameters
+>5:TOPIC
+<5::irc.free_shipping.net 461 plopez-b TOPIC :Not enough parameters
+>5:USER
+<5::irc.free_shipping.net 461 plopez-b USER :Not enough parameters
+>5:QUIT
+x5:

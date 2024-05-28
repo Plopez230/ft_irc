@@ -1,0 +1,58 @@
+>5:PRIVMSG #notregisteredtest :estoy probando cosas
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:KICK #notregisteredtest anonymous
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:KICK
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:PRIVMSG
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:JOIN
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:JOIN #notregisteredtest
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:MODE
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:PART
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:TOPIC
+<5::irc.free_shipping.net 451 * :You have not registered
+>5:NICK
+<5::irc.free_shipping.net 431 * :No nickname given
+>5:USER
+<5::irc.free_shipping.net 461 * USER :Not enough parameters
+>5:PASS
+<5::irc.free_shipping.net 461 * PASS :Not enough parameters
+>5:PASS 1111
+>5:NICK me
+>5:USER a a a a 
+<5::me!a@a NICK me
+<5::irc.free_shipping.net 001 me :Welcome to the Internet Relay Network :me!a@a
+<5::irc.free_shipping.net 002 me :Your host is a, running version v1.0
+<5::irc.free_shipping.net 003 me :This server was created today :)
+<5::irc.free_shipping.net 004 me a v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #notregisteredtest
+<5::me!a@a JOIN :#notregisteredtest
+<5::irc.free_shipping.net 331 me #notregisteredtest :No topic is set
+<5::irc.free_shipping.net 353 me = #notregisteredtest :@me
+<5::irc.free_shipping.net 366 me #notregisteredtest :End of NAMES list
+>5:PRIVMSG #notregisteredtest :hola mundo
+>5:INVITE me #notregisteredtest
+<5::irc.free_shipping.net 443 me #notregisteredtest me :is already on channel
+>5:MODE #notregisteredtest +i
+<5::me!a@a MODE #notregisteredtest +i
+>5:TOPIC #notregisteredtest :new topic
+<5::me!a@a TOPIC #notregisteredtest :new topic
+<5::irc.free_shipping.net 332 me #notregisteredtest :new topic
+>5:PART #notregisteredtest
+<5::me!a@a PART #notregisteredtest
+>5:JOIN #notregisteredtest2
+<5::me!a@a JOIN :#notregisteredtest2
+<5::irc.free_shipping.net 331 me #notregisteredtest2 :No topic is set
+<5::irc.free_shipping.net 353 me = #notregisteredtest2 :@me
+<5::irc.free_shipping.net 366 me #notregisteredtest2 :End of NAMES list
+>5:KICK #notregisteredtest2 me
+<5::me!a@a KICK #notregisteredtest2 me
+>5:PART #notregisteredtest2
+<5::irc.free_shipping.net 442 me #notregisteredtest2 :You're not on that channel
+>5:QUIT
+x5:

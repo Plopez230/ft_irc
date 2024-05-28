@@ -220,3 +220,8 @@ std::string err_umodeunknownflag(Server *s, User *u)
 {
     return err_prefix(s, u, "501") + ":Unknown MODE flag";
 }
+
+std::string err_notregistered(Server *s, User *u)
+{
+    return err_prefix(s, u, "451") + ":You have not registered";
+}

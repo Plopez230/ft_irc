@@ -72,6 +72,12 @@ static void join_channel(Server *s, User *u, const std::string &channel_name,
 
 void join_command(Command *c, Server *s, User *u)
 {
+    if (!u->get_is_registered())
+    {
+        u->enqueue_message(err_notregistered(s, u));
+        return;
+    }
+    
     if (c->size() < 2)
     {
         u->enqueue_message(err_needmoreparams(c, s, u));
