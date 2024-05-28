@@ -6,13 +6,18 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:04:36 by jariza-o          #+#    #+#             */
-/*   Updated: 2024/05/27 19:06:53 by jariza-o         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:35:54 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bot.hpp"
-#include <iostream>
-#include <unistd.h>
+#include <csignal>
+
+static void signal_handler(int signal)
+{
+	(void) signal;
+	throw std::runtime_error("Stopping...");
+}
 
 int	main(int argc, char** argv)
 {
@@ -24,18 +29,29 @@ int	main(int argc, char** argv)
 	}
 	try 
 	{
+		std::signal(SIGINT, &signal_handler);
+		std::signal(SIGTERM, &signal_handler);
+
 		Bot	server(argv[1], argv[2], argv[3]);
 		server.send("NICK emilio");
-		//std::cout << server.receive() << std::endl;
 		server.send("USER a a a a");
-		//std::cout << server.receive() << std::endl;
 		while (1)
 		{
-			std::string line;
-			std::cin >> line;
-			std::cout << line << "hjkhjk" << std::endl;
-			server.send(line);
-			//server.receive();
+			std::string	mess = server.receive();
+			std::cout << mess << std::endl;
+			std::vector<std::string> mess_splitted = ::split(mess, ' ', false);
+			if (mess_splitted[1] == "INVITE")
+			{
+				server.send("JOIN " + mess_splitted[3]);
+				sleep(2);
+				mess_splitted[3].erase((mess_splitted[3].length() - 1), mess_splitted[3].length());
+				std::string m = "PRIVMSG " + mess_splitted[3] + " :" + "Hola, soy Emilio, el bot mas loco. Te respondere cosas sin sentido: AGUACATE!!!!";
+				server.send(m);
+			}
+			else if (mess_splitted[1] == "PRIVMSG")
+			{
+				server.send("PRIVMSG " + mess_splitted[2] + " :" + server.get_randomPhrase());
+			}
 		}
 	}
 	catch(const std::runtime_error& e)

@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:35:18 by jariza-o          #+#    #+#             */
-/*   Updated: 2024/05/27 19:02:06 by jariza-o         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:54:25 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 #include "irc.hpp"
 #include <iostream>
+#include <unistd.h>
+#include <poll.h>
+#include <ctime>
+#include <cstdlib>
 
 class Bot
 {
@@ -25,17 +29,19 @@ public:
 
 	void		send(const std::string& message);
 	std::string	receive();
+	std::string	get_randomPhrase() const;
 
 private:
 	Bot(const Bot& src);
-	Bot& 		operator=(const Bot& src);
-	int			sock;
-	std::string	ipAddress, port, pass;
-	addrinfo	h;
-	addrinfo*	r;
+	Bot& 						operator=(const Bot& src);
+	int							sock;
+	std::string					ipAddress, port, pass;
+	addrinfo					h;
+	addrinfo*					r;
+	std::vector<std::string>	phrases;
 	
 };
 
-
+std::vector<std::string> split(const std::string &s, char del, bool include_delimiter);
 
 #endif
