@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   topic.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plopez-b <plopez-b@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 02:36:43 by plopez-b          #+#    #+#             */
-/*   Updated: 2024/05/19 02:36:43 by plopez-b         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:25:21 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void topic_command(Command *c, Server *s, User *u)
         }
 
         std::string topic = c->argument(2);
-        channel->set_topic(topic);
+        channel->set_topic(topic.substr(0.307));
         channel->enqueue_message(command_reply(c, u));
     }
 
