@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:10:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2024/05/28 15:42:24 by jariza-o         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:32:32 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ Bot::Bot(const char* ipAddress, const char* port, const char* pass, const char* 
 	{
 		throw std::runtime_error("socket failed");
 	}
-	freeaddrinfo(this->r);
 	if (connect(this->sock, this->r->ai_addr, this->r->ai_addrlen) == -1)
 	{
 		throw std::runtime_error("connection failed");
 	}
 	this->send("PASS " + this->pass);
+	freeaddrinfo(this->r);
 }
 Bot::~Bot()
 {
@@ -60,7 +60,7 @@ std::string	Bot::receive()
 	char buffer[512];
 
 	int bytes_received = recv(this->sock, buffer, sizeof buffer - 1, 0);
-	if (bytes_received == -1) {
+	if (bytes_received <= 0) {
 		throw std::runtime_error("recv failed");
 	}
 	buffer[bytes_received] = '\0';
