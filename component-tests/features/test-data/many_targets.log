@@ -1,0 +1,49 @@
+>5:CAP LS 302
+>5:PASS 1111
+>5:NICK Pablo
+>5:USER Pablo 0 * :realname
+<5::irc.free_shipping.net 421 * CAP :Unknown command
+<5::Pablo!Pablo@0 NICK Pablo
+<5::irc.free_shipping.net 001 Pablo :Welcome to the Internet Relay Network :Pablo!Pablo@0
+<5::irc.free_shipping.net 002 Pablo :Your host is *, running version v1.0
+<5::irc.free_shipping.net 003 Pablo :This server was created today :)
+<5::irc.free_shipping.net 004 Pablo * v1.0 Available user modes: , Available channel modes: iklot
+>5:JOIN #manytargets1
+<5::Pablo!Pablo@0 JOIN :#manytargets1
+<5::irc.free_shipping.net 331 Pablo #manytargets1 :No topic is set
+<5::irc.free_shipping.net 353 Pablo = #manytargets1 :@Pablo
+>5:MODE #manytargets1
+<5::irc.free_shipping.net 366 Pablo #manytargets1 :End of NAMES list
+>5:WHO #manytargets1
+<5::irc.free_shipping.net 324 Pablo #manytargets1 
+<5::irc.free_shipping.net 421 Pablo WHO :Unknown command
+>6:PASS 1111
+>6:USER a a a a
+>6:NICK anonymous
+<6::anonymous!a@a NICK anonymous
+<6::irc.free_shipping.net 001 anonymous :Welcome to the Internet Relay Network :anonymous!a@a
+<6::irc.free_shipping.net 002 anonymous :Your host is a, running version v1.0
+<6::irc.free_shipping.net 003 anonymous :This server was created today :)
+<6::irc.free_shipping.net 004 anonymous a v1.0 Available user modes: , Available channel modes: iklot
+>6:JOIN #manytargets1
+<6::anonymous!a@a JOIN :#manytargets1
+<5::anonymous!a@a JOIN :#manytargets1
+<6::irc.free_shipping.net 332 anonymous #manytargets1 :
+<6::irc.free_shipping.net 353 anonymous = #manytargets1 :@Pablo anonymous
+<6::irc.free_shipping.net 366 anonymous #manytargets1 :End of NAMES list
+>6:PRIVMSG #manytargets1 :hello
+<5::anonymous!a@a PRIVMSG #manytargets1 :hello
+>6:PRIVMSG #manytargets1,Pablo :hello again
+<5::anonymous!a@a PRIVMSG #manytargets1 :hello again
+<5::anonymous!a@a PRIVMSG Pablo :hello again
+>6:PRIVMSG Pablo,#manytargets1,Pablo :goodbye
+<6::irc.free_shipping.net 407 anonymous Pablo :Duplicate recipients. No message delivered
+<5::anonymous!a@a PRIVMSG Pablo :goodbye
+<5::anonymous!a@a PRIVMSG #manytargets1 :goodbye
+>6:PRIVMSG #manytargets1,Pablo,#manytargets1 :Hello!
+<6::irc.free_shipping.net 407 anonymous #manytargets1 :Duplicate recipients. No message delivered
+<5::anonymous!a@a PRIVMSG #manytargets1 :Hello!
+<5::anonymous!a@a PRIVMSG Pablo :Hello!
+x6:
+>5:QUIT :Leaving
+x5:

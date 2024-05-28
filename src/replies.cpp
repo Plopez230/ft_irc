@@ -225,3 +225,9 @@ std::string err_notregistered(Server *s, User *u)
 {
     return err_prefix(s, u, "451") + ":You have not registered";
 }
+
+std::string err_toomanytargets(Server *s, User *u, std::string target)
+{
+    return err_prefix(s, u, "407") + target
+        + " :Duplicate recipients. No message delivered";
+}

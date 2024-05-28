@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "irc.hpp"
+#include <set>
 
 void privmsg_command(Command *c, Server *s, User *u)
 {
@@ -41,8 +42,18 @@ void privmsg_command(Command *c, Server *s, User *u)
         return;
     }
 
+    std::set<std::string> already_sent;
+
     for (size_t i = 0; i < receivers.size(); i++)
     {
+        if (already_sent.find(receivers[i]) != already_sent.end())
+        {
+            u->enqueue_message(err_toomanytargets(s, u, receivers[i]));
+            continue;
+        }
+
+        already_sent.insert(receivers[i]);
+
         if (s->is_channel(receivers[i]))
         {
             Channel *channel = s->find_channel(receivers[i]);
