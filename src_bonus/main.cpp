@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:04:36 by jariza-o          #+#    #+#             */
-/*   Updated: 2024/05/28 11:35:54 by jariza-o         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:43:02 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void signal_handler(int signal)
 
 int	main(int argc, char** argv)
 {
-	if (argc < 4)
+	if (argc < 5)
 	{
 		std::cout << "ERROR!! The parameters number is incorrect:" << std::endl;
-		std::cout << "./bot <IP Server> <Port Number> <Password>" << std::endl;
+		std::cout << "./bot <IP Server> <Port Number> <Password> <NickName>" << std::endl;
 		return 1;
 	}
 	try 
@@ -32,8 +32,8 @@ int	main(int argc, char** argv)
 		std::signal(SIGINT, &signal_handler);
 		std::signal(SIGTERM, &signal_handler);
 
-		Bot	server(argv[1], argv[2], argv[3]);
-		server.send("NICK emilio");
+		Bot	server(argv[1], argv[2], argv[3], argv[4]);
+		server.send("NICK " + server.get_nick());
 		server.send("USER a a a a");
 		while (1)
 		{
@@ -45,7 +45,7 @@ int	main(int argc, char** argv)
 				server.send("JOIN " + mess_splitted[3]);
 				sleep(2);
 				mess_splitted[3].erase((mess_splitted[3].length() - 1), mess_splitted[3].length());
-				std::string m = "PRIVMSG " + mess_splitted[3] + " :" + "Hola, soy Emilio, el bot mas loco. Te respondere cosas sin sentido: AGUACATE!!!!";
+				std::string m = "PRIVMSG " + mess_splitted[3] + " :" + "Hola, soy " + server.get_nick() + ", el bot mas loco. Te respondere cosas sin sentido: AGUACATE!!!!";
 				server.send(m);
 			}
 			else if (mess_splitted[1] == "PRIVMSG")

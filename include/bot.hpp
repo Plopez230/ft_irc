@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:35:18 by jariza-o          #+#    #+#             */
-/*   Updated: 2024/05/28 12:47:46 by jariza-o         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:41:47 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,20 @@ class Bot
 {
 public:
 	Bot();
-	Bot(const char* ipAddress, const char* port, const char* pass);
+	Bot(const char* ipAddress, const char* port, const char* pass, const char* nick);
 	~Bot();
 
 	void		send(const std::string& message);
 	std::string	receive();
 	std::string	get_randomPhrase() const;
+	std::string	get_nick() const;
 
 private:
 	Bot(const Bot& src);
 	Bot& 						operator=(const Bot& src);
 	int							sock;
 	int							addrinf;
-	std::string					ipAddress, port, pass;
+	std::string					ipAddress, port, pass, nick;
 	addrinfo					h;
 	addrinfo*					r;
 	std::vector<std::string>	phrases;

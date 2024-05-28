@@ -6,18 +6,19 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:10:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2024/05/28 12:53:23 by jariza-o         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:42:24 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bot.hpp"
 
 Bot::Bot(){}
-Bot::Bot(const char* ipAddress, const char* port, const char* pass)
+Bot::Bot(const char* ipAddress, const char* port, const char* pass, const char* nick)
 {
 	this->ipAddress = ipAddress;
 	this->port = port;
 	this->pass = pass;
+	this->nick = nick;
 
 	this->h.ai_family = AF_INET;
 	this->h.ai_socktype = SOCK_STREAM;
@@ -122,4 +123,9 @@ std::string	Bot::get_randomPhrase() const
 	}
 	
 	return "jAJJAJAJAJAJJAjA";
+}
+
+std::string	Bot::get_nick() const
+{
+	return this->nick;
 }
