@@ -184,6 +184,7 @@ class Tracer
 {
 private:
     std::ofstream *file;
+    bool enabled;
     Tracer(Tracer const &t);
     Tracer &operator=(Tracer const &t);
 public:
