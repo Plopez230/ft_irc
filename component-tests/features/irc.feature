@@ -20,3 +20,4 @@ Feature: IRC
     | quit.log                                                              |
     | sigpipe.log                                                           |
     | not_registered.log                                                    |
+    | not_enough_params.log                                                 |
