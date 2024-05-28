@@ -6,7 +6,7 @@
 #    By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 11:54:06 by jariza-o          #+#    #+#              #
-#    Updated: 2024/05/27 19:08:51 by jariza-o         ###   ########.fr        #
+#    Updated: 2024/05/28 13:01:19 by jariza-o         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ clean:
 fclean:	clean
 	@rm -f ${NAME} ${NAME_BONUS}
 
+fclean_bonus:	clean
+	@rm -f ${NAME_BONUS}
+
 re:		fclean all
 
 r:		fclean all
@@ -53,10 +56,10 @@ bonus:	$(NAME_BONUS)
 $(NAME_BONUS): ${OBJ_BONUS}
 	@clang++ ${CFLAGS} ${OBJ_BONUS} -o ${NAME_BONUS}
 
-re_bonus:	fclean bonus
+re_bonus:	fclean_bonus bonus
 
 
 valgrind: all
 	@valgrind --leak-check=full ./ircserv 12345 1111
 
-.PHONY: all clean fclean re r valgrind bonus re_bonus
+.PHONY: all clean fclean fclean_bonus re r valgrind bonus re_bonus
