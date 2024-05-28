@@ -7,7 +7,7 @@ class Client:
         self.address = address
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.settimeout(0.1)
+        self.socket.settimeout(3)
         self.socket.connect((self.address, self.port))
         self.receive_queue = []
 
@@ -18,12 +18,10 @@ class Client:
         self.socket.sendall((msg + "\n").encode('utf-8'))
 
     def receive(self):
-        try:
+        if len(self.receive_queue) == 0:
             msg = self.socket.recv(10000).decode('utf-8')
             self.receive_queue.extend(
                 [s for s in msg.split("\n") if not s == ""])
-        except:
-            pass
         try:
             return self.receive_queue.pop(0)
         except:
@@ -62,14 +60,16 @@ class Playback:
                 clients[line["client"]] = Client(self.ip, self.port)
 
             if line["action"] == "<": #receive
+                print (l)
                 response = clients[line["client"]].receive()
                 if validate_responses:
                     assert line["message"] in response, \
                         line["message"] + " not in " + response
 
             if line["action"] == ">": #send
+                print (l)
                 clients[line["client"]].send(line["message"])
 
             if line["action"] == "x": #close connection
-                response = clients[line["client"]].receive()
+                print (l)
                 del clients[line["client"]]

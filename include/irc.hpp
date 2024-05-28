@@ -319,5 +319,6 @@ std::string rpl_inviting(Server *s, Channel *c, User *u, User *user);
 std::string err_useronchannel(Server *s, Channel *c, User *u, User *user);
 std::string rpl_notopic(Server *s, Channel *c, User *u);
 std::string err_umodeunknownflag(Server *s, User *u);
+std::string err_notregistered(Server *s, User *u);
 
 #endif

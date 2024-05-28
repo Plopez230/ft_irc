@@ -19,3 +19,4 @@ Feature: IRC
     | mode.log                                                              |
     | quit.log                                                              |
     | sigpipe.log                                                           |
+    | not_registered.log                                                    |
