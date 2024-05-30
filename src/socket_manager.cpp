@@ -87,17 +87,13 @@ void SocketManager::loop()
 
 	for (size_t pos = 0; pos < this->pollfds.size(); pos++)
 	{
-		if (this->pollfds[pos].revents == 0)
-		{
-			continue;
-		}
-
 		if (this->pollfds[pos].revents & (POLLHUP | POLLERR | POLLNVAL))
 		{
 			to_close.push_back(this->pollfds[pos]);
 		}
 
-		else if (this->pollfds[pos].fd == this->manager_fd)
+		else if (this->pollfds[pos].revents & POLLIN
+			&& this->pollfds[pos].fd == this->manager_fd)
 		{
 			new_connection(this->pollfds[pos]);
 		}

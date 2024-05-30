@@ -56,6 +56,7 @@ int main (int argc, char **argv)
 		std::signal(SIGINT, &signal_handler);
 		std::signal(SIGTERM, &signal_handler);
 
+		std::cout << "Listening on port " << argv[1] << std::endl;
 		Server server(argv[2]);
 		SocketManager socket_manager(argv[1], server);
 

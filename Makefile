@@ -30,13 +30,15 @@ NAME	=	ircserv
 
 NAME_BONUS	=	bot
 
+COMPILER = g++
+
 all:	$(NAME)
 $(NAME): ${OBJ}
-	@clang++ ${CFLAGS} ${OBJ} -o ${NAME}
+	@${COMPILER} ${CFLAGS} ${OBJ} -o ${NAME}
 
 obj/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	@clang++ ${CFLAGS} -c $< -o $@
+	@${COMPILER} ${CFLAGS} -c $< -o $@
 
 clean:
 	@rm -rf ${OBJ} ${OBJ_bonus} obj/
@@ -54,7 +56,7 @@ r:		fclean all
 
 bonus:	$(NAME_BONUS)
 $(NAME_BONUS): ${OBJ_BONUS}
-	@clang++ ${CFLAGS} ${OBJ_BONUS} -o ${NAME_BONUS}
+	@${COMPILER} ${CFLAGS} ${OBJ_BONUS} -o ${NAME_BONUS}
 
 re_bonus:	fclean_bonus bonus
 
